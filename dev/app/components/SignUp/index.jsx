@@ -5,15 +5,28 @@ class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            firstName: 'First Name',
+            lastName: 'Last Name',
             email: 'Enter an Email',
             password: '',
         }
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleEmail(event) {
+    handleFirstName = event => {
+        const firstName = event.target.value;
+        this.setState({
+            firstName,
+        })
+    }
+
+    handleLastName = event => {
+        const lastName = event.target.value;
+        this.setState({
+            lastName,
+        })
+    }
+
+    handleEmail = event => {
         const email = event.target.value;
 
         this.setState({
@@ -21,37 +34,47 @@ class SignUp extends Component {
         })
     }
 
-    handlePassword(event) {
+    handlePassword = event => {
         const password = event.target.value;
         this.setState({
             password,
         })
     }
 
-    handleSubmit(event) {
+    handleSubmit = async event => {
         event.preventDefault();
         const { email, password } = this.state;
 
         const payload = prepPayload({ email, password })
 
-        fetch(API_URL, payload)
-            .then(res => console.log('the response is ', res))
+        let result = await fetch(API_URL, payload)
+            .then(res => res.json())
             .catch(error => console.log('the error is ', error));
+
+
+        console.log('await result inside handleSubmit is ', result)
     }
 
     render() {
-        const { email, password } = this.state;
+        const { firstName, lastName, email, password } = this.state;
         return (
             <div>
                 <h1>Sign Up</h1>
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <div>
+                            <label htmlFor='first-name'>First Name</label>
+                            <input value={firstName} onChange={this.handleFirstName} type='text' />
+
+                            <label htmlFor='last-name'>Last Name</label>
+                            <input value={lastName} onChange={this.handleLastName} type='text' />
+
                             <label htmlFor='email'>Email</label>
                             <input value={email} onChange={this.handleEmail} type='text' />
 
                             <label htmlFor='password'>Password</label>
                             <input value={password} onChange={this.handlePassword} type='password' />
+
                             <button>Submit</button>
                         </div>
 

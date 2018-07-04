@@ -4,7 +4,7 @@ const Router = express.Router();
 
 Router.post('/signup', (req, res) => {
     console.log('Signup a User', req.body)
-    res.send("<h1>signup successful</h1>")
+    res.send({status: 'Ok', message: 'made it to signup router'})
 })
 
 Router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
