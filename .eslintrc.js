@@ -13,7 +13,10 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "prettier","react"
+        "prettier",
+        "react",
+        "jsx-a11y",
+        "import"
     ],
     "rules": {
         "indent": [

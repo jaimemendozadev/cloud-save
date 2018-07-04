@@ -9,6 +9,9 @@ passport.use(new GoogleStrategy({
   },
   (accessToken, refreshToken, profile, cb) => {
     console.log('Do something with Google user profile')
+    console.log('accessToken ', accessToken)
+    console.log('refreshToken ', refreshToken)
+    console.log('profile ', profile)
   }
 ));
 
