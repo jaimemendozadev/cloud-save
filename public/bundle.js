@@ -106,7 +106,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _index = __webpack_require__(/*! ./components/SignUp/index.jsx */ \"./dev/app/components/SignUp/index.jsx\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App() {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(\n\t\t\t'h1',\n\t\t\tnull,\n\t\t\t'Welcome to Cloud Save'\n\t\t),\n\t\t_react2.default.createElement(\n\t\t\t'h2',\n\t\t\tnull,\n\t\t\t'A simple web app to store your files in the cloud'\n\t\t),\n\t\t_react2.default.createElement(_index2.default, null)\n\t);\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./dev/app/index.jsx?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _index = __webpack_require__(/*! ./components/SignUp/index.jsx */ \"./dev/app/components/SignUp/index.jsx\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _styles = __webpack_require__(/*! ./styles/styles.scss */ \"./dev/app/styles/styles.scss\");\n\nvar _styles2 = _interopRequireDefault(_styles);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App() {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(\n\t\t\t'h1',\n\t\t\tnull,\n\t\t\t'Welcome to Cloud Save'\n\t\t),\n\t\t_react2.default.createElement(\n\t\t\t'h2',\n\t\t\tnull,\n\t\t\t'A simple web app to store your files in the cloud'\n\t\t),\n\t\t_react2.default.createElement(_index2.default, null)\n\t);\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./dev/app/index.jsx?");
+
+/***/ }),
+
+/***/ "./dev/app/styles/styles.scss":
+/*!************************************!*\
+  !*** ./dev/app/styles/styles.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./dev/app/styles/styles.scss?");
 
 /***/ }),
 

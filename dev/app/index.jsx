@@ -1,5 +1,7 @@
 import React from 'react';
 import SignUp from './components/SignUp/index.jsx'
+import Styles from './styles/styles.scss'
+
 const App = () => (
 	<div>
 		<h1>Welcome to Cloud Save</h1>
