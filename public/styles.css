@@ -5,3 +5,37 @@
 
 html {
   box-sizing: border-box; }
+
+.sign-up {
+  border: 1px solid pink;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center; }
+  .sign-up form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-items: center;
+    width: 80%;
+    border: 1px solid purple; }
+    .sign-up form .form-child {
+      margin-top: 1em; }
+      .sign-up form .form-child input {
+        width: 100%;
+        font-size: 1em;
+        padding: 7px;
+        border: 1px solid grey;
+        border-radius: 3px;
+        background-color: rgba(128, 128, 128, 0.1); }
+      .sign-up form .form-child label {
+        font-size: 1.2em;
+        display: block; }
+
+@media only screen and (max-width: 450px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; } }

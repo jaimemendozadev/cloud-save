@@ -12,6 +12,25 @@ class SignUp extends Component {
         }
     }
 
+    handleOnFocus = formField => {
+        const formPlaceholder = {
+            firstName: 'First Name',
+            lastName: 'Last Name',
+            email: 'Enter an Email',
+        }
+
+        const currentField = this.state[formField]
+
+        if (currentField === formPlaceholder[formField]) {
+            const newFormValue = {}
+            newFormValue[formField] = ''
+            const newState = Object.assign({}, this.state, newFormValue)
+
+            this.setState(newState)
+        }
+
+    }
+
     handleFirstName = event => {
         const firstName = event.target.value;
         this.setState({
@@ -58,29 +77,31 @@ class SignUp extends Component {
     render() {
         const { firstName, lastName, email, password } = this.state;
         return (
-            <div>
+            <div className='sign-up'>
                 <h1>Sign Up</h1>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <div>
-                            <label htmlFor='first-name'>First Name</label>
-                            <input value={firstName} onChange={this.handleFirstName} type='text' />
 
-                            <label htmlFor='last-name'>Last Name</label>
-                            <input value={lastName} onChange={this.handleLastName} type='text' />
+                <form onSubmit={this.handleSubmit}>
 
-                            <label htmlFor='email'>Email</label>
-                            <input value={email} onChange={this.handleEmail} type='text' />
+                    <div className='form-child'>
+                        <label htmlFor='first-name'>First Name</label>
+                        <input onFocus={() => this.handleOnFocus('firstName')} value={firstName} onChange={this.handleFirstName} type='text' />
+                    </div>
+                    <div className='form-child'>
+                        <label htmlFor='last-name'>Last Name</label>
+                        <input onFocus={() => this.handleOnFocus('lastName')} value={lastName} onChange={this.handleLastName} type='text' />
+                    </div>
+                    <div className='form-child'>
+                        <label htmlFor='email'>Email</label>
+                        <input onFocus={() => this.handleOnFocus('email')} value={email} onChange={this.handleEmail} type='text' />
+                    </div>
+                    <div className='form-child'>
+                        <label htmlFor='password'>Password</label>
+                        <input value={password} onChange={this.handlePassword} type='password' />
+                    </div>
+                    <button>Submit</button>
+                </form>
+                <a href="http://localhost:3000/api/auth/google">Sign Up with Google</a>
 
-                            <label htmlFor='password'>Password</label>
-                            <input value={password} onChange={this.handlePassword} type='password' />
-
-                            <button>Submit</button>
-                        </div>
-
-                        <a href="http://localhost:3000/api/auth/google">Sign Up with Google</a>
-                    </form>
-                </div>
             </div>
         )
     }

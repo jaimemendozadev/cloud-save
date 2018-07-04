@@ -7,3 +7,55 @@
 html {
   box-sizing: border-box;
 }
+
+
+.sign-up {
+  border: 1px solid pink;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-items: center;
+    width: 80%;
+    border: 1px solid purple;
+    
+
+    .form-child {
+      margin-top: 1em;
+
+      input {
+        width: 100%;
+        font-size: 1em;
+        padding: 7px;
+        border: 1px solid grey;
+        border-radius: 3px;
+        background-color: rgba(grey, .1)
+      }
+      
+      label {
+        font-size: 1.2em;
+        display: block;
+      }
+    }
+    
+    
+  }
+}
+
+
+
+@media only screen and (max-width: 450px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
