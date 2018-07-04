@@ -1,3 +1,14 @@
+const entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+  };
+
 export const prepPayload = (data) => {
     const payload = {
         method: 'POST', 
@@ -8,4 +19,10 @@ export const prepPayload = (data) => {
     }
 
     return payload;
+}
+
+
+
+export const escapeHtml = string => {
+  return String(string).replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }

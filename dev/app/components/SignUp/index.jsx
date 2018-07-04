@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { prepPayload } from './utils';
+import { prepPayload, escapeHtml } from './utils';
 const API_URL = 'http://localhost:3000/api/auth/signup'
 class SignUp extends Component {
     constructor(props) {
@@ -32,21 +32,21 @@ class SignUp extends Component {
     }
 
     handleFirstName = event => {
-        const firstName = event.target.value;
+        const firstName = escapeHtml(event.target.value);
         this.setState({
             firstName,
         })
     }
 
     handleLastName = event => {
-        const lastName = event.target.value;
+        const lastName = escapeHtml(event.target.value);
         this.setState({
             lastName,
         })
     }
 
     handleEmail = event => {
-        const email = event.target.value;
+        const email = escapeHtml(event.target.value);
 
         this.setState({
             email,
@@ -54,7 +54,7 @@ class SignUp extends Component {
     }
 
     handlePassword = event => {
-        const password = event.target.value;
+        const password = escapeHtml(event.target.value);
         this.setState({
             password,
         })
