@@ -1,11 +1,9 @@
 const express = require('express');
 const passport = require('../../services/passport');
 const Router = express.Router();
+const {signup} = require('./controllers');
 
-Router.post('/signup', (req, res) => {
-    console.log('Signup a User', req.body)
-    res.send({status: 'Ok', message: 'made it to signup router'})
-})
+Router.post('/signup', signup)
 
 Router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 

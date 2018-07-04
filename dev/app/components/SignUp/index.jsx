@@ -5,8 +5,8 @@ class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            firstName: 'First Name',
-            lastName: 'Last Name',
+            first_name: 'First Name',
+            last_name: 'Last Name',
             email: 'Enter an Email',
             password: '',
         }
@@ -14,8 +14,8 @@ class SignUp extends Component {
 
     handleOnFocus = formField => {
         const formPlaceholder = {
-            firstName: 'First Name',
-            lastName: 'Last Name',
+            first_name: 'First Name',
+            last_name: 'Last Name',
             email: 'Enter an Email',
         }
 
@@ -32,16 +32,16 @@ class SignUp extends Component {
     }
 
     handleFirstName = event => {
-        const firstName = escapeHtml(event.target.value);
+        const first_name = escapeHtml(event.target.value);
         this.setState({
-            firstName,
+            first_name,
         })
     }
 
     handleLastName = event => {
-        const lastName = escapeHtml(event.target.value);
+        const last_name = escapeHtml(event.target.value);
         this.setState({
-            lastName,
+            last_name,
         })
     }
 
@@ -62,9 +62,9 @@ class SignUp extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
-        const { email, password } = this.state;
+        const { first_name, last_name, email, password } = this.state;
 
-        const payload = prepPayload({ email, password })
+        const payload = prepPayload({ first_name, last_name, email, password })
 
         let result = await fetch(API_URL, payload)
             .then(res => res.json())
@@ -75,7 +75,7 @@ class SignUp extends Component {
     }
 
     render() {
-        const { firstName, lastName, email, password } = this.state;
+        const { first_name, last_name, email, password } = this.state;
         return (
             <div className='sign-up'>
                 <h1>Sign Up</h1>
@@ -84,11 +84,11 @@ class SignUp extends Component {
 
                     <div className='form-child'>
                         <label htmlFor='first-name'>First Name</label>
-                        <input onFocus={() => this.handleOnFocus('firstName')} value={firstName} onChange={this.handleFirstName} type='text' />
+                        <input onFocus={() => this.handleOnFocus('first_name')} value={first_name} onChange={this.handleFirstName} type='text' />
                     </div>
                     <div className='form-child'>
                         <label htmlFor='last-name'>Last Name</label>
-                        <input onFocus={() => this.handleOnFocus('lastName')} value={lastName} onChange={this.handleLastName} type='text' />
+                        <input onFocus={() => this.handleOnFocus('last_name')} value={last_name} onChange={this.handleLastName} type='text' />
                     </div>
                     <div className='form-child'>
                         <label htmlFor='email'>Email</label>

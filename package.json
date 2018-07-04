@@ -8,6 +8,7 @@
     "build": "webpack --mode='development' --watch"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
