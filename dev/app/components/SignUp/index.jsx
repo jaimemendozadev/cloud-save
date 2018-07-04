@@ -100,7 +100,9 @@ class SignUp extends Component {
                     </div>
                     <button>Submit</button>
                 </form>
-                <a href="http://localhost:3000/api/auth/google">Sign Up with Google</a>
+                <div className='googleSignUp'>
+                    <a href="http://localhost:3000/api/auth/google">Sign Up with Google</a>
+                </div>
 
             </div>
         )
