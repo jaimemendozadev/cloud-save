@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'h1',\n            null,\n            'Welcome to Cloud Save'\n        ),\n        _react2.default.createElement(\n            'h2',\n            null,\n            'A simple web app to store your files in the cloud'\n        )\n    );\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./dev/app/index.jsx?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App() {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(\n\t\t\t'h1',\n\t\t\tnull,\n\t\t\t'Welcome to Cloud Save'\n\t\t),\n\t\t_react2.default.createElement(\n\t\t\t'h2',\n\t\t\tnull,\n\t\t\t'A simple web app to store your files in the cloud'\n\t\t)\n\t);\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./dev/app/index.jsx?");
 
 /***/ }),
 
