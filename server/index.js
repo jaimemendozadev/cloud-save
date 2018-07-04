@@ -1,3 +1,4 @@
+require('./services/DB');
 const express = require('express');
 const mainRouter = require('./api')
 const app = express();
