@@ -10,6 +10,11 @@ const signup = async (req, res) => {
   res.send(newUser)
 }
 
+const authWithGoogle = (req, res) => {
+  res.send(req.user)
+}
+
 module.exports = {
-  signup
+  signup,
+  authWithGoogle
 }
