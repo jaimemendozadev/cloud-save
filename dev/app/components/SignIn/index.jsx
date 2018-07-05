@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { prepPayload, escapeHtml } from './utils';
 const API_URL = 'http://localhost:3000/api/auth/signup'
-class SignUp extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -64,7 +64,7 @@ class SignUp extends Component {
         const { first_name, last_name, email, password } = this.state;
         return (
             <div className='sign-up'>
-                <h1>Sign Up</h1>
+                <h1>Sign In</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className='form-child'>
                         <label htmlFor='first-name'>First Name</label>
@@ -93,7 +93,7 @@ class SignUp extends Component {
 }
 
 
-export default SignUp;
+export default SignIn;
 
 
 

@@ -20,7 +20,7 @@ const authWithGoogle = (req, res) => {
 
   const userToken = generateJWT(req.user.email);
 
-  res.redirect(`/signup?token=${userToken}`);
+  res.redirect(`/signin?token=${userToken}`);
 
 }
 
