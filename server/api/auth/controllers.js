@@ -1,11 +1,5 @@
-const jwt = require('jsonwebtoken');
 const {User} = require('../../services/DB/Models')
-const {JWTSecret} = process.env
-
-const generateJWT = email => {
-  const token = jwt.sign({email}, JWTSecret);
-  return token;
-}
+const {generateJWT, extractUserDBInfo} = require('./utils');
 
 const signup = async (req, res) => {
   let newUser = req.body;
@@ -19,12 +13,15 @@ const signup = async (req, res) => {
   res.send({token: userToken});
 }
 
-const authWithGoogle = (req, res) => {
-  let newUser = req.user;
 
-  const userToken = generateJWT(newUser.email);
-  
-  res.redirect(`/?token=${userToken}`);
+
+
+const authWithGoogle = (req, res) => {
+
+  const userToken = generateJWT(req.user.email);
+
+  res.redirect(`/signup?token=${userToken}`);
+
 }
 
 module.exports = {

@@ -5,7 +5,9 @@ const {signup, authWithGoogle} = require('./controllers');
 
 Router.post('/signup', signup)
 Router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
-Router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), authWithGoogle)
+// Failure Redirect doesn't seem to go where you specify
+Router.get('/google/callback', passport.authenticate('google', {session: false, failureRedirect: '/signup' }), authWithGoogle)
+
 Router.post('/login', (req, res) => console.log('Login a User'))
 
 
