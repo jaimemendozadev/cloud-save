@@ -68,7 +68,9 @@ class SignUp extends Component {
 
         let result = await fetch(API_URL, payload)
             .then(res => res.json())
-            .catch(error => console.log('the error is ', error));
+            .catch(error => {
+                console.log('the error is ', error)
+            });
 
 
         console.log('await result inside handleSubmit is ', result)

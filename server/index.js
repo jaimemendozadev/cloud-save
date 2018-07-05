@@ -12,7 +12,7 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', mainRouter)
-app.get('/', (req, res) => {
+app.use('*', (req, res) => {
   res.sendFile(publicPath);
 });
 
