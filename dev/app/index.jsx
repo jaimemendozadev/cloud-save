@@ -1,13 +1,15 @@
 import React from 'react';
-import SignUp from './components/SignUp/index.jsx'
+import { SignUp, SplashPage } from './components/index.jsx'
 import Styles from './styles/styles.scss'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => (
-	<div>
-		<h1>Welcome to Cloud Save</h1>
-		<h2>A simple web app to store your files in the cloud</h2>
-		<SignUp />
-	</div>
+	<Router>
+		<Switch>
+			<Route path='/signup' component={SignUp} />
+			<Route path='/' component={SplashPage} />
+		</Switch>
+	</Router>
 );
 
 export default App;
