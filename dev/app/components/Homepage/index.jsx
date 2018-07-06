@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Homepage extends Component {
     constructor(props) {
@@ -6,6 +7,9 @@ class Homepage extends Component {
     }
 
     render() {
+        const { currentUser } = this.props
+        console.log('currentUser is ', currentUser);
+
         return (
             <div>
                 <h1>Welcome to the CloudSave Homepage</h1>
@@ -14,5 +18,10 @@ class Homepage extends Component {
     }
 }
 
+function mapStateToProps({ currentUser }) {
+    return {
+        currentUser
+    }
+}
 
-export default Homepage;
+export default connect(mapStateToProps, null)(Homepage);

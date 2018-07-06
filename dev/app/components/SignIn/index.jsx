@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { prepPayload, escapeHtml, handleOnFocus, handleFirstName, handleLastName } from './utils';
-import { initSocialAuth, getSocialAuthUser, resetSocialAuth } from '../../services/redux/actions/Auth'
+import { initSocialAuth, getSocialAuthUser, resetSocialAuth, tokenSet } from '../../services/redux/actions/Auth'
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -17,6 +17,8 @@ class SignIn extends Component {
             password: '',
             authError: '',
             signInError: '',
+            redirect: false,
+            redirectTarget: null,
         }
     }
 
@@ -32,10 +34,15 @@ class SignIn extends Component {
         }
     }
 
-    handleRedirect = (target) => {
+    handleRedirect = target => {
+
+        console.log('inside handleRedirect')
+        console.log('this.props inside handleRedirect ', this.props)
 
         if (target === 'homepage') {
-            <Redirect to='/homepage' />
+            console.log('inside redirect conditional');
+
+            this.props.history.push('/homepage');
         }
     }
 
@@ -123,12 +130,14 @@ class SignIn extends Component {
         //If we've kicked off social auth, look for the token
         if (authInProgress) {
 
-            console.log('inside checkSocialAuth')
-
-            console.log('location is ', location)
-
             if (location.search && location.search.includes('token')) {
                 const token = location.search.slice(7);
+
+                // Save token in localStorage
+                localStorage.setItem('token', token);
+
+                tokenSet(); // Fire off tokenSet Action
+
                 getSocialAuthUser(token, context, this.handleRedirect);
 
                 //We didn't get the token, reset Redux Auth state
@@ -146,10 +155,23 @@ class SignIn extends Component {
         this.checkSocialAuth()
     }
 
+    componentDidUpdate = (_prevProps, prevState, _snapshot) => {
+        const prevRedirect = prevState.redirect;
+        const prevRedirectTarget = prevState.redirectTarget;
+        const { redirect, redirectTarget } = this.state;
+
+        if (prevRedirect != redirect && prevRedirectTarget != redirectTarget) {
+            this.handleRedirect(redirectTarget)
+        }
+
+    }
+
     render() {
         const { first_name, last_name, email, password } = this.state;
 
         console.log('props inside SignIn render ', this.props)
+
+
 
         return (
             <div className='sign-up'>
@@ -190,7 +212,7 @@ function mapStateToProps({ authStatus }) {
     }
 }
 
-export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser, resetSocialAuth })(SignIn);
+export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser, resetSocialAuth, tokenSet })(SignIn);
 
 
 

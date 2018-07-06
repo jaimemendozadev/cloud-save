@@ -12,14 +12,13 @@ let persistor = persistStore(Store);
 
 const App = () => (
 	<Provider store={Store}>
-		<PersistGate loading={Loading} persistor={persistor}>
+		<PersistGate loading={null} persistor={persistor}>
 			<Router>
 				<Switch>
 					{/* <Route path='/homepage' component={Homepage} /> */}
-
 					<Route exact path='/' component={SplashPage} />
 					<Route path='/signin' component={SignIn} />
-					<ProtectedRoute component={Homepage} />
+					<ProtectedRoute path='/homepage' component={Homepage} />
 
 				</Switch>
 			</Router>

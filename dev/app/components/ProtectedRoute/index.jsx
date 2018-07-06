@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class ProtectedRoute extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            waitingAuth: true,
-            userAuthenticated: false,
-        }
 
+        this.state = {
+            haveToken: false
+        }
     }
 
     handleProtectedRoute = () => {
-        const { userAuthenticated } = this.state;
-        if (userAuthenticated) {
+        const token = localStorage.getItem('token');
+
+        if (token) {
             const { component: Component, ...rest } = this.props;
             return (
                 <Route {...rest} render={props => (
@@ -21,39 +22,59 @@ class ProtectedRoute extends Component {
                 )} />
             )
         } else {
-            return <Redirect to='/signin' />
+            this.props.history.push('/signin');
         }
     }
 
     componentDidMount() {
+
         const token = localStorage.getItem('token');
 
         console.log('token inside ProtectRoute Homepage CDM ', token);
+
         if (token) {
             this.setState({
-                waitingAuth: false,
-                userAuthenticated: true,
-            });
-        } else {
-            this.setState({
-                waitingAuth: false,
-                userAuthenticated: false,
-            });
+                haveToken: true
+            })
         }
+
+
+
     }
 
     render() {
-        console.log('inside ProtectedRoute')
-        console.log('this.state inside ProtectedRoute ', this.state)
-        const { waitingAuth } = this.state;
+        console.log('inside ProtectedRoute render')
+        const { authInProgress } = this.props;
+        console.log('props inside protected route ', this.props)
 
-        if (waitingAuth) {
-            return <h3>Waiting for Authentication to finish...</h3>
-        } else {
-            this.handleProtectedRoute();
+        const { haveToken } = this.state;
+
+        if (authInProgress === false) {
+            this.props.history.push('/homepage');
         }
+
+        if (haveToken) {
+            return this.handleProtectedRoute();
+        }
+
+        else {
+            return <h3>Waiting for authentication...</h3>
+        }
+
+
+
+
+
 
 
     }
 }
-export default ProtectedRoute;
+
+
+function mapStateToProps({ authStatus }) {
+    return {
+        authInProgress: authStatus.authInProgress,
+        tokenSet: authStatus.tokenSet,
+    }
+}
+export default connect(mapStateToProps, null)(ProtectedRoute);
