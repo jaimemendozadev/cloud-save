@@ -35,8 +35,6 @@ const signup = async (req, res) => {
 
       newUser.token = userToken;
 
-      console.log('newUser we send to FE ', newUser)
-
       res.send(newUser);
     }
 
@@ -47,10 +45,10 @@ const signup = async (req, res) => {
 }
 
 const foundUser = (req, res) => {
-  console.log('req is ', req)
-  console.log('\n');
+  
+  let userInDB = req.user;
 
-  const userInDB = req.user;
+  userInDB = userInDB.pop();
 
   console.log('userInDB is ', userInDB)
 

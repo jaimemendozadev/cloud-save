@@ -18,17 +18,35 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:3000/api/auth/google/callback',
   },
   async (_accessToken, _refreshToken, profile, callback) => {
+    let savedUser;
 
     try {
-      let newUser = extractGoogleProfile(profile);
-    
-      // Create a new User with Drive
-      newUser = await new User(newUser);
+      // First, try to see if we already have the user
+      savedUser = await User.find({ email: profile.emails[0].value });
 
-      newUser = await newUser.save();
+      console.log('savedUser in Google OAuth ', savedUser)
+
+      // If we already saved the User, send the savedUser to Google callback
+      if (savedUser.length) {
+        savedUser = savedUser.pop();
+        
+        callback(null, newUser)
+
+      } else {
+        // Get extract the User's Google profile, save to DB, and send to Callback
+        let newUser = extractGoogleProfile(profile);
+    
+        // Create a new User with Drive
+        newUser = await new User(newUser);
+
+        newUser = await newUser.save();
+
+        console.log('newUser we pass to Google Callback ', newUser)
       
-      // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
-      callback(null, newUser)
+        // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
+        callback(null, newUser)
+
+      }
 
     } catch(error){
       console.log("There was an error saving/updating the user.", error);
@@ -38,10 +56,10 @@ passport.use(new GoogleStrategy({
       //At this point, User gets redirected to empty page with /auth/google/callback?code url
       callback(errorMessage, null);
     }
-
     
   }
 ));
+
 
 
 /***************************

@@ -1,12 +1,12 @@
 const extractGoogleProfile = profile => {
     const {name, emails, photos } = profile;
-    let first_name = name.givenName;
-    let last_name = name.familyName;
-    let email = emails[0].value;
-    let social_login = true;
-    let profile_picture = photos[0].value;
+    const first_name = name.givenName;
+    const last_name = name.familyName;
+    const email = emails[0].value;
+    const social_login = true;
+    const profile_picture = photos[0].value ? photos[0].value : '';
 
-    let newUser = {
+    const newUser = {
       first_name,
       last_name,
       email,
