@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignIn, SplashPage, Loading, Homepage } from './components/index.jsx'
+import { SignIn, SplashPage, Loading, Homepage, ProtectedRoute } from './components/index.jsx'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
@@ -16,7 +16,8 @@ const App = () => (
 			<Router>
 				<Switch>
 					<Route path='/homepage' component={Homepage} />
-					<Route path='/signin' component={SignIn} />
+					<ProtectedRoute Component={SignIn} />
+					{/* <Route path='/signin' component={SignIn} /> */}
 					<Route path='/' component={SplashPage} />
 				</Switch>
 			</Router>
