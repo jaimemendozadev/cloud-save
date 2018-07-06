@@ -13,7 +13,9 @@ const signup = async (req, res) => {
   res.send({token: userToken});
 }
 
+const retrieveUser = async(req, res) => {
 
+}
 
 
 const authWithGoogle = (req, res) => {
@@ -26,5 +28,6 @@ const authWithGoogle = (req, res) => {
 
 module.exports = {
   signup,
-  authWithGoogle
+  retrieveUser,
+  authWithGoogle,
 }

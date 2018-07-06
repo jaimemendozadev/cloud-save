@@ -1,8 +1,16 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const {User} = require('../DB/Models');
 const {extractGoogleProfile} = require('./utils');
+
+
+/***************************
+ * Google Passport Strategy
+****************************/
+
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
@@ -34,6 +42,24 @@ passport.use(new GoogleStrategy({
     
   }
 ));
+
+
+/***************************
+ * JWT Passport Strategy
+****************************/
+
+
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWTSecret;
+
+
+passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
+
+  console.log('jwt_payload is ', jwt_payload)
+
+
+}));
 
 
 module.exports = passport;

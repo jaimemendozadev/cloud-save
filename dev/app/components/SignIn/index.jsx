@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { prepPayload, escapeHtml } from './utils';
-import { initSocialAuth } from '../../services/redux/actions/Auth'
+import { initSocialAuth, getSocialAuthUser } from '../../services/redux/actions/Auth'
 
-const API_URL = 'http://localhost:3000/api/auth/signup'
+const API_URL = 'http://localhost:3000/api';
 
 
 class SignIn extends Component {
@@ -14,6 +14,7 @@ class SignIn extends Component {
             last_name: 'Last Name',
             email: 'Enter an Email',
             password: '',
+            authError: '',
         }
     }
     handleOnFocus = formField => {
@@ -58,7 +59,7 @@ class SignIn extends Component {
         event.preventDefault();
         const { first_name, last_name, email, password } = this.state;
         const payload = prepPayload({ first_name, last_name, email, password })
-        let result = await fetch(API_URL, payload)
+        let result = await fetch(`${API_URL}/auth/signup`, payload)
             .then(res => res.json())
             .catch(error => {
                 console.log('the error is ', error)
@@ -66,14 +67,30 @@ class SignIn extends Component {
         console.log('await result inside handleSubmit is ', result)
     }
 
+    checkSocialAuth = () => {
+        const { authStatus, location, getSocialAuthUser } = this.props;
+        if (authStatus) {
+            if (location.search && location.search.includes('token')) {
+                const token = location.search.slice(7);
+                getSocialAuthUser(token);
+
+            } else {
+                this.setState({
+                    authError: "We couldn\'t verify your credentials. Please try again."
+                })
+            }
+        }
+    }
+
     componentDidMount = () => {
         console.log('current props in CDM are ', this.props);
         // this.props.location.search
+
+        this.checkSocialAuth()
     }
 
     render() {
         const { first_name, last_name, email, password } = this.state;
-        console.log('this.props in SignIn render are ', this.props)
         const { initSocialAuth } = this.props;
 
         return (
@@ -112,7 +129,7 @@ function mapStateToProps({ authStatus }) {
     }
 }
 
-export default connect(mapStateToProps, { initSocialAuth })(SignIn);
+export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser })(SignIn);
 
 
 
