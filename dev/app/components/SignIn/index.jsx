@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { prepPayload, escapeHtml, handleOnFocus, handleFirstName, handleLastName } from './utils';
 import { initSocialAuth, getSocialAuthUser, resetSocialAuth } from '../../services/redux/actions/Auth'
 
@@ -16,6 +17,25 @@ class SignIn extends Component {
             password: '',
             authError: '',
             signInError: '',
+        }
+    }
+
+    displayError = () => {
+        const { authError, signInError } = this.state;
+
+        if (authError) {
+            return <h3 className='errorMsg'>{authError}</h3>
+        }
+
+        if (signInError) {
+            return <h3 className='errorMsg'>{signInError}</h3>
+        }
+    }
+
+    handleRedirect = (target) => {
+
+        if (target === 'homepage') {
+            <Redirect to='/homepage' />
         }
     }
 
@@ -88,15 +108,24 @@ class SignIn extends Component {
         }
     }
 
+    handleSocialAuth = () => {
+        const { initSocialAuth } = this.props;
+
+        this.setState({
+            authError: ''
+        }, () => initSocialAuth())
+    }
+
     checkSocialAuth = () => {
         const { authInProgress, location, getSocialAuthUser, resetSocialAuth } = this.props;
+        const context = this;
 
         //If we've kicked off social auth, look for the token
         if (authInProgress) {
 
             if (location.search && location.search.includes('token')) {
                 const token = location.search.slice(7);
-                getSocialAuthUser(token);
+                getSocialAuthUser(token, context, this.handleRedirect);
 
                 //We didn't get the token, reset Redux Auth state
             } else {
@@ -104,18 +133,6 @@ class SignIn extends Component {
                     authError: "We couldn\'t verify your credentials. Please try again."
                 }, () => resetSocialAuth())
             }
-        }
-    }
-
-    displayError = () => {
-        const { authError, signInError } = this.state;
-
-        if (authError) {
-            return <h3 className='errorMsg'>{authError}</h3>
-        }
-
-        if (signInError) {
-            return <h3 className='errorMsg'>{signInError}</h3>
         }
     }
 
@@ -127,7 +144,8 @@ class SignIn extends Component {
 
     render() {
         const { first_name, last_name, email, password } = this.state;
-        const { initSocialAuth } = this.props;
+
+        console.log('props inside SignIn render ', this.props)
 
         return (
             <div className='sign-up'>
@@ -151,7 +169,7 @@ class SignIn extends Component {
                     </div>
                     <button>Submit</button>
                 </form>
-                <div onClick={initSocialAuth} className='googleSignUp'>
+                <div onClick={this.handleSocialAuth} className='googleSignUp'>
                     <a href="http://localhost:3000/api/auth/google">Sign In with Google</a>
                 </div>
                 <div>

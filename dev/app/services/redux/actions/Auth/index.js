@@ -16,7 +16,7 @@ export const initSocialAuth = () => {
 }
 
 
-export const getSocialAuthUser = token => {
+export const getSocialAuthUser = (token, context, callback) => {
   const payload = prepAuthPayload(token);
 
   return (dispatch) => {
@@ -25,9 +25,18 @@ export const getSocialAuthUser = token => {
       .then(results => {
 
         console.log('results in getSocialAuthUser ', results);
-        // Save User in Redux
+        console.log('context inside getSocialAuthUser ', context)
+
+        
         // Save token in localStorage
+        localStorage.setItem('token', token);
+
+        // Save User in Redux
+        dispatch({type: APP_INIT, payload: results});
+
         // Redirect to Homepage
+
+      
       })
       
   }

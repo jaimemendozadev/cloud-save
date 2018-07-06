@@ -9,7 +9,7 @@ const generateJWT = email => {
 
 const extractUserDBInfo = user => {
 
-    const {first_name, last_name, email, drive} = user;
+    const {first_name, last_name, email, drive, social_login} = user;
 
     const profile_picture = !user.profile_picture ? '' : user.profile_picture;
 
@@ -18,7 +18,8 @@ const extractUserDBInfo = user => {
       last_name, 
       email, 
       profile_picture, 
-      drive
+      drive,
+      social_login
     }
 }
 

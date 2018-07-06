@@ -45,12 +45,14 @@ const signup = async (req, res) => {
 }
 
 const foundUser = (req, res) => {
-  
+
   let userInDB = req.user;
 
   userInDB = userInDB.pop();
 
-  console.log('userInDB is ', userInDB)
+  userInDB = extractUserDBInfo(userInDB);
+
+  console.log('extracted userInDB is ', userInDB)
 
   res.send(userInDB);
 }
