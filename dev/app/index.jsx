@@ -15,10 +15,12 @@ const App = () => (
 		<PersistGate loading={Loading} persistor={persistor}>
 			<Router>
 				<Switch>
-					<Route path='/homepage' component={Homepage} />
-					<ProtectedRoute Component={SignIn} />
-					{/* <Route path='/signin' component={SignIn} /> */}
-					<Route path='/' component={SplashPage} />
+					{/* <Route path='/homepage' component={Homepage} /> */}
+
+					<Route exact path='/' component={SplashPage} />
+					<Route path='/signin' component={SignIn} />
+					<ProtectedRoute component={Homepage} />
+
 				</Switch>
 			</Router>
 		</PersistGate>

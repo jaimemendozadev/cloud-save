@@ -8,7 +8,7 @@ class Homepage extends Component {
     render() {
         return (
             <div>
-                <h1>Homepage</h1>
+                <h1>Welcome to the CloudSave Homepage</h1>
             </div>
         )
     }

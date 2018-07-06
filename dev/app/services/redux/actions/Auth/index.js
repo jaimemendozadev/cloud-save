@@ -35,8 +35,7 @@ export const getSocialAuthUser = (token, context, callback) => {
         dispatch({type: APP_INIT, payload: results});
 
         // Redirect to Homepage
-
-      
+        callback('homepage')
       })
       
   }
