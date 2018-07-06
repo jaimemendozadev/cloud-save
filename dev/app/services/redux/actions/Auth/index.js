@@ -1,6 +1,7 @@
 import {prepAuthPayload, prepReduxActionPayload} from './utils';
 export const INIT_SOCIAL_AUTH = 'INIT_SOCIAL_AUTH';
 export const APP_INIT = 'APP_INIT';
+export const RESET_SOCIAL_AUTH = 'RESET_SOCIAL_AUTH';
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -31,6 +32,13 @@ export const getSocialAuthUser = token => {
       
   }
   
+}
+
+
+export const resetSocialAuth = () => {
+  return {
+    type: RESET_SOCIAL_AUTH,
+  }
 }
 
    

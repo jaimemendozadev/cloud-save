@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { prepPayload, escapeHtml } from './utils';
-import { initSocialAuth, getSocialAuthUser } from '../../services/redux/actions/Auth'
+import { prepPayload, escapeHtml, handleOnFocus, handleFirstName, handleLastName } from './utils';
+import { initSocialAuth, getSocialAuthUser, resetSocialAuth } from '../../services/redux/actions/Auth'
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -15,8 +15,10 @@ class SignIn extends Component {
             email: 'Enter an Email',
             password: '',
             authError: '',
+            signInError: '',
         }
     }
+
     handleOnFocus = formField => {
         const formPlaceholder = {
             first_name: 'First Name',
@@ -31,60 +33,94 @@ class SignIn extends Component {
             this.setState(newState)
         }
     }
+
     handleFirstName = event => {
         const first_name = escapeHtml(event.target.value);
         this.setState({
             first_name,
+            authError: '',
+            signInError: '',
         })
     }
+
     handleLastName = event => {
         const last_name = escapeHtml(event.target.value);
         this.setState({
             last_name,
+            authError: '',
+            signInError: '',
         })
     }
+
     handleEmail = event => {
         const email = escapeHtml(event.target.value);
         this.setState({
             email,
+            authError: '',
+            signInError: '',
         })
     }
     handlePassword = event => {
         const password = escapeHtml(event.target.value);
         this.setState({
             password,
+            authError: '',
+            signInError: '',
         })
     }
     handleSubmit = async event => {
         event.preventDefault();
         const { first_name, last_name, email, password } = this.state;
-        const payload = prepPayload({ first_name, last_name, email, password })
-        let result = await fetch(`${API_URL}/auth/signup`, payload)
-            .then(res => res.json())
-            .catch(error => {
-                console.log('the error is ', error)
+        const payload = prepPayload({ first_name, last_name, email, password });
+
+        try {
+            let result = await fetch(`${API_URL}/auth/signup`, payload)
+                .then(res => res.json());
+
+            console.log('await result inside handleSubmit is ', result);
+
+        } catch (error) {
+            console.log('Error from sign in ', error)
+
+            this.setState({
+                signInError: 'There was an error signing in. Try again later.'
             });
-        console.log('await result inside handleSubmit is ', result)
+        }
     }
 
     checkSocialAuth = () => {
-        const { authStatus, location, getSocialAuthUser } = this.props;
-        if (authStatus) {
+        const { authInProgress, location, getSocialAuthUser, resetSocialAuth } = this.props;
+
+        //If we've kicked off social auth, look for the token
+        if (authInProgress) {
+
             if (location.search && location.search.includes('token')) {
                 const token = location.search.slice(7);
                 getSocialAuthUser(token);
 
+                //We didn't get the token, reset Redux Auth state
             } else {
                 this.setState({
                     authError: "We couldn\'t verify your credentials. Please try again."
-                })
+                }, () => resetSocialAuth())
             }
+        }
+    }
+
+    displayError = () => {
+        const { authError, signInError } = this.state;
+
+        if (authError) {
+            return <h3 className='errorMsg'>{authError}</h3>
+        }
+
+        if (signInError) {
+            return <h3 className='errorMsg'>{signInError}</h3>
         }
     }
 
     componentDidMount = () => {
         console.log('current props in CDM are ', this.props);
-        // this.props.location.search
 
         this.checkSocialAuth()
     }
@@ -118,6 +154,9 @@ class SignIn extends Component {
                 <div onClick={initSocialAuth} className='googleSignUp'>
                     <a href="http://localhost:3000/api/auth/google">Sign In with Google</a>
                 </div>
+                <div>
+                    {this.displayError()}
+                </div>
             </div>
         )
     }
@@ -125,11 +164,11 @@ class SignIn extends Component {
 
 function mapStateToProps({ authStatus }) {
     return {
-        authStatus
+        authInProgress: authStatus.authInProgress
     }
 }
 
-export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser })(SignIn);
+export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser, resetSocialAuth })(SignIn);
 
 
 

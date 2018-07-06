@@ -50,6 +50,9 @@ html {
       text-decoration: none;
       color: black; }
 
+.errorMsg {
+  color: red; }
+
 @media only screen and (max-width: 450px) {
   body {
     display: flex;
