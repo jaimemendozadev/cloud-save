@@ -5,7 +5,7 @@ const ProtectedRoute = (props) => {
     const { Component } = props;
 
     return (
-        <Component />
+        <Component {...props} />
     )
 }
 

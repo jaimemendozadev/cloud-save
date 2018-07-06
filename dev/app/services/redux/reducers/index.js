@@ -1,6 +1,7 @@
 import { persistCombineReducers} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import authStatusReducer from './Auth'
+import currentUserReducer from './User';
 
 const config = {
   key: 'primary',
@@ -9,7 +10,10 @@ const config = {
 
 let rootReducer =  persistCombineReducers(
   config,
-  {authStatus: authStatusReducer}
+  {
+    authStatus: authStatusReducer,
+    currentUser: currentUserReducer,
+  }
 )
 
 

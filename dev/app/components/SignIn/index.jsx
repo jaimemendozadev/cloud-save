@@ -123,6 +123,10 @@ class SignIn extends Component {
         //If we've kicked off social auth, look for the token
         if (authInProgress) {
 
+            console.log('inside checkSocialAuth')
+
+            console.log('location is ', location)
+
             if (location.search && location.search.includes('token')) {
                 const token = location.search.slice(7);
                 getSocialAuthUser(token, context, this.handleRedirect);
