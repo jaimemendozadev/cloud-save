@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { prepPayload, escapeHtml } from './utils';
+import { initSocialAuth } from '../../services/redux/actions/Auth'
+
 const API_URL = 'http://localhost:3000/api/auth/signup'
+
+
 class SignIn extends Component {
     constructor(props) {
         super(props)
@@ -60,8 +65,17 @@ class SignIn extends Component {
             });
         console.log('await result inside handleSubmit is ', result)
     }
+
+    componentDidMount = () => {
+        console.log('current props in CDM are ', this.props);
+        // this.props.location.search
+    }
+
     render() {
         const { first_name, last_name, email, password } = this.state;
+        console.log('this.props in SignIn render are ', this.props)
+        const { initSocialAuth } = this.props;
+
         return (
             <div className='sign-up'>
                 <h1>Sign In</h1>
@@ -84,16 +98,21 @@ class SignIn extends Component {
                     </div>
                     <button>Submit</button>
                 </form>
-                <div className='googleSignUp'>
-                    <a href="http://localhost:3000/api/auth/google">Sign Up with Google</a>
+                <div onClick={initSocialAuth} className='googleSignUp'>
+                    <a href="http://localhost:3000/api/auth/google">Sign In with Google</a>
                 </div>
             </div>
         )
     }
 }
 
+function mapStateToProps({ authStatus }) {
+    return {
+        authStatus
+    }
+}
 
-export default SignIn;
+export default connect(mapStateToProps, { initSocialAuth })(SignIn);
 
 
 
