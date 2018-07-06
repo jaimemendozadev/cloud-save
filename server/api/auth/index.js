@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('../../services/passport');
 const Router = express.Router();
-const {signup, authWithGoogle, retrieveUser} = require('./controllers');
+const {signup, authWithGoogle, foundUser} = require('./controllers');
 
 Router.post('/signup', signup);
 Router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -9,7 +9,7 @@ Router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 Router.get('/google/callback', passport.authenticate('google', {session: false, failureRedirect: '/signup' }), authWithGoogle);
 
 
-Router.get('/user',  passport.authenticate('jwt', { session: false }), retrieveUser)
+Router.get('/user',  passport.authenticate('jwt', { session: false }), foundUser)
 
 
 Router.post('/login', (req, res) => console.log('Login a User'))

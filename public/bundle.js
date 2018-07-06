@@ -162,11 +162,11 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /*!******************************************************!*\
   !*** ./dev/app/services/redux/actions/Auth/index.js ***!
   \******************************************************/
-/*! exports provided: INIT_SOCIAL_AUTH, initSocialAuth, getSocialAuthUser */
+/*! exports provided: INIT_SOCIAL_AUTH, APP_INIT, initSocialAuth, getSocialAuthUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"INIT_SOCIAL_AUTH\", function() { return INIT_SOCIAL_AUTH; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"initSocialAuth\", function() { return initSocialAuth; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getSocialAuthUser\", function() { return getSocialAuthUser; });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./dev/app/services/redux/actions/Auth/utils.js\");\n\nconst INIT_SOCIAL_AUTH = 'INIT_SOCIAL_AUTH';\n\nconst API_URL = 'http://localhost:3000/api'\n\nconst initSocialAuth = () => {\n  const payload = {\n    authInProgress: true\n  }\n  return {\n    type: INIT_SOCIAL_AUTH,\n    payload,\n  }\n}\n\n\nconst getSocialAuthUser = token => {\n  const payload = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"prepAuthPayload\"])(token);\n\n  return (dispatch) => {\n    fetch(`${API_URL}/auth/user`, payload)\n      .then(response => {\n        console.log('Response in initSocialAuth ', response)\n        // Save User in Redux\n        // Save token in localStorage\n        // Redirect to Homepage\n\n      })    \n  }\n  \n}\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/Auth/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"INIT_SOCIAL_AUTH\", function() { return INIT_SOCIAL_AUTH; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"APP_INIT\", function() { return APP_INIT; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"initSocialAuth\", function() { return initSocialAuth; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getSocialAuthUser\", function() { return getSocialAuthUser; });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./dev/app/services/redux/actions/Auth/utils.js\");\n\nconst INIT_SOCIAL_AUTH = 'INIT_SOCIAL_AUTH';\nconst APP_INIT = 'APP_INIT';\n\nconst API_URL = 'http://localhost:3000/api'\n\nconst initSocialAuth = () => {\n  const payload = {\n    authInProgress: true\n  }\n  return {\n    type: INIT_SOCIAL_AUTH,\n    payload,\n  }\n}\n\n\nconst getSocialAuthUser = token => {\n  const payload = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"prepAuthPayload\"])(token);\n\n  return (dispatch) => {\n    fetch(`${API_URL}/auth/user`, payload)\n      .then(response => response.json())\n      .then(results => {\n\n        console.log('results in getSocialAuthUser ', results);\n        // Save User in Redux\n        // Save token in localStorage\n        // Redirect to Homepage\n      })\n      \n  }\n  \n}\n\n   \n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/Auth/index.js?");
 
 /***/ }),
 
@@ -174,11 +174,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!******************************************************!*\
   !*** ./dev/app/services/redux/actions/Auth/utils.js ***!
   \******************************************************/
-/*! exports provided: prepAuthPayload */
+/*! exports provided: prepAuthPayload, prepReduxActionPayload */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"prepAuthPayload\", function() { return prepAuthPayload; });\nconst prepAuthPayload = token => {\n    const payload = {\n        method: 'GET',\n          headers: {\n            'Authorization': `bearer ${token}`\n        }\n      };\n    \n      return payload;\n}\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/Auth/utils.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"prepAuthPayload\", function() { return prepAuthPayload; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"prepReduxActionPayload\", function() { return prepReduxActionPayload; });\nconst prepAuthPayload = token => {\n    const payload = {\n        method: 'GET',\n          headers: {\n            'Authorization': `bearer ${token}`\n        }\n      };\n    \n      return payload;\n}\n\n\nconst prepReduxActionPayload = user => {\n  const { first_name, last_name, email, profile_picture, drive } = user;\n\n  return {\n    first_name, \n    last_name, \n    email, \n    profile_picture, \n    drive\n  }\n}\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/Auth/utils.js?");
 
 /***/ }),
 

@@ -1,4 +1,4 @@
-const {APP_INIT} from '../../actions/User';
+import {APP_INIT} from '../../actions/Auth';
 const initialState = {
     first_name: '',
     last_name: '',

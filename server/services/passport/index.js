@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:3000/api/auth/google/callback',
   },
-  async (_accessToken, _refreshToken, profile, cb) => {
+  async (_accessToken, _refreshToken, profile, callback) => {
 
     try {
       let newUser = extractGoogleProfile(profile);
@@ -28,7 +28,7 @@ passport.use(new GoogleStrategy({
       newUser = await newUser.save();
       
       // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
-      cb(null, newUser)
+      callback(null, newUser)
 
     } catch(error){
       console.log("There was an error saving/updating the user.", error);
@@ -54,9 +54,27 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWTSecret;
 
 
-passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
+passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
 
   console.log('jwt_payload is ', jwt_payload)
+
+  const userEmail = jwt_payload.email;
+
+  try {
+  
+    // Find User in DB
+    let foundUser = await User.find({email: userEmail});
+    
+    // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
+    callback(null, foundUser)
+
+  } catch(error){
+    console.log("There was an error getting the user from the DB.", error);
+
+    const errorMessage = "Whoops! There was an error finding you in our system, please try again later.";
+
+    callback(errorMessage, false);
+  }
 
 
 }));
