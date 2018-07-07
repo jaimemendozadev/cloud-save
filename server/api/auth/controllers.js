@@ -4,23 +4,22 @@ const {generateJWT, extractUserDBInfo} = require('./utils');
 const signup = async (req, res) => {
   let savedUser;
   let userToken;
-  let FE_Payload;
   
   try {
     // First, try to see if we already have the user
-     savedUser = await User.find({email: req.body.email});
+     savedUser = await User.find({email: req.body.email}).populate('drive').exec();
 
     // If we already saved the User, send the payload with token to FE
     if (savedUser.length) {
-      FE_Payload = savedUser.pop();
-      
-      FE_Payload = extractUserDBInfo(FE_Payload);
+      savedUser = savedUser.pop();
+
+      savedUser = extractUserDBInfo(savedUser);
       
       userToken = generateJWT(savedUser.email);
       
-      FE_Payload.token = userToken;
+      savedUser.token = userToken;
       
-      res.send(FE_Payload);
+      res.send(savedUser);
 
 
     } else {
@@ -47,8 +46,6 @@ const signup = async (req, res) => {
 const foundUser = (req, res) => {
 
   let userInDB = req.user;
-
-  userInDB = userInDB.pop();
 
   userInDB = extractUserDBInfo(userInDB);
 

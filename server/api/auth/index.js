@@ -3,7 +3,8 @@ const passport = require('../../services/passport');
 const Router = express.Router();
 const {signup, authWithGoogle, foundUser} = require('./controllers');
 
-Router.post('/signup', signup);
+Router.post('/signup', signup); // Not part of Passport strategy
+
 Router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 // Failure Redirect doesn't seem to go where you specify
 Router.get('/google/callback', passport.authenticate('google', {session: false, failureRedirect: '/signup' }), authWithGoogle);

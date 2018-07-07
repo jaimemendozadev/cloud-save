@@ -22,13 +22,13 @@ passport.use(new GoogleStrategy({
 
     try {
       // First, try to see if we already have the user
-      savedUser = await User.find({ email: profile.emails[0].value });
-
-      console.log('savedUser in Google OAuth ', savedUser)
+      savedUser = await User.find({ email: profile.emails[0].value }).populate('drive').exec();
 
       // If we already saved the User, send the savedUser to Google callback
       if (savedUser.length) {
         savedUser = savedUser.pop();
+
+        console.log('savedUser with populate Drive from Google OAuth is ', savedUser)
         
         callback(null, newUser)
 
@@ -81,10 +81,16 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
   try {
   
     // Find User in DB
-    let foundUser = await User.find({email: userEmail});
-    
+    let savedUser = await User.find({email: userEmail}).populate('drive').exec();
+
+    savedUser = savedUser.pop();
+
+    savedUser = savedUser.populate('drive').exec();
+
+    console.log('savedUser with populate Drive from JWT Passport is ', savedUser)
+
     // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
-    callback(null, foundUser)
+    callback(null, savedUser)
 
   } catch(error){
     console.log("There was an error getting the user from the DB.", error);

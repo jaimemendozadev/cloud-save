@@ -7,13 +7,15 @@ const getSignedUrl = (req, res) => {
     // Save uuid-Key with regular key name in DB
     // Make request for presigned URL
     
+
+    /*
     const Key: 
 
     const payload = {
       Bucket: AWS_BUCKET_NAME,
       Key, 
     }
-  
+    */
   
     res.send('hit AWS upload controller');
 

@@ -10,22 +10,18 @@ const generateJWT = email => {
 
 const extractUserDBInfo = user => {
 
-    const {first_name, last_name, email, social_login} = user;
+  const {first_name, last_name, email, drive, social_login} = user;
 
-    const profile_picture = !user.profile_picture ? '' : user.profile_picture;
+  const profile_picture = !user.profile_picture ? '' : user.profile_picture;
 
-    // let {drive} = user; // Get the User's drive from DB
-
-    // drive = await Drive.
-
-    return {
-      first_name,
-      last_name, 
-      email, 
-      profile_picture, 
-      drive,
-      social_login
-    }
+  return {
+    first_name,
+    last_name, 
+    email, 
+    profile_picture, 
+    drive,
+    social_login
+  }
 }
 
 
