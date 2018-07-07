@@ -39,9 +39,6 @@ class ProtectedRoute extends Component {
                 haveToken: true
             });
         }
-
-
-
     }
 
     render() {

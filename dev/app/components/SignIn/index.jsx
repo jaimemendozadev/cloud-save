@@ -138,9 +138,14 @@ class SignIn extends Component {
 
     render() {
         const { first_name, last_name, email, password, redirect, redirectTarget } = this.state;
+        const { RegularAuthInProgress } = this.props;
 
         if (redirect && redirectTarget) {
             return <Redirect to={`/${redirectTarget}`} />
+        }
+
+        if (RegularAuthInProgress === true) {
+            return <h3>Please wait while we register your information...</h3>
         }
 
         return (
