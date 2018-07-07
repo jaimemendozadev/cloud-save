@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 class ProtectedRoute extends Component {
     constructor(props) {
         super(props);
+        const { authInProgress } = this.props;
 
         this.state = {
-            haveToken: false
+            haveToken: false,
+            authInProgress,
+
         }
     }
 
@@ -43,14 +46,14 @@ class ProtectedRoute extends Component {
 
     render() {
         console.log('inside ProtectedRoute render')
-        const { authInProgress } = this.props;
+        const { authInProgress } = this.state;
         console.log('props inside protected route ', this.props)
 
         const { haveToken } = this.state;
 
         // If Auth process hasn't started, redirect to Homepage
         if (authInProgress === false) {
-            this.props.history.push('/homepage');
+            return <Redirect to='/signin' />
         }
 
         // If we have the token, handleProtectedRoute

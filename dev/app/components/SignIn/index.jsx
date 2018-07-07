@@ -34,13 +34,6 @@ class SignIn extends Component {
         }
     }
 
-    handleRedirect = target => {
-
-        if (target === 'homepage') {
-            this.props.history.push('/homepage');
-        }
-    }
-
     handleOnFocus = formField => {
         const formPlaceholder = {
             first_name: 'First Name',
@@ -148,20 +141,12 @@ class SignIn extends Component {
         this.checkSocialAuth()
     }
 
-    componentDidUpdate = (_prevProps, prevState, _snapshot) => {
-        const prevRedirect = prevState.redirect;
-        const prevRedirectTarget = prevState.redirectTarget;
-        const { redirect, redirectTarget } = this.state;
-
-        // If we set a redirect in state, handle the redirect
-        if (prevRedirect != redirect && prevRedirectTarget != redirectTarget) {
-            this.handleRedirect(redirectTarget)
-        }
-
-    }
-
     render() {
-        const { first_name, last_name, email, password } = this.state;
+        const { first_name, last_name, email, password, redirect, redirectTarget } = this.state;
+
+        if (redirect && redirectTarget) {
+            return <Redirect to={`/${redirectTarget}`} />
+        }
 
         return (
             <div className='sign-up'>
