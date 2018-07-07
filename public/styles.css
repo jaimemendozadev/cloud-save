@@ -52,9 +52,14 @@ html {
 
 .homepage {
   width: 70%;
-  height: 100vh;
   border: 1px solid pink;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2em; }
+
+.headers-container {
+  height: 200px; }
 
 .file-picker {
   border: 1px solid green;
@@ -64,7 +69,8 @@ html {
   flex-wrap: wrap; }
   .file-picker form {
     display: flex;
-    width: 100%; }
+    width: 100%;
+    height: 80%; }
   .file-picker .upload-btn-container {
     position: relative;
     overflow: hidden;
@@ -97,15 +103,13 @@ html {
     font-size: 20px;
     font-weight: bold;
     height: 50px; }
+  .file-picker .file-name-display {
+    border: 1px solid salmon;
+    height: 20%;
+    width: 800px; }
 
 .errorMsg {
   color: red; }
-
-@media only screen and (max-width: 450px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center; } }
 
 @media only screen and (max-width: 650px) {
   .file-picker {

@@ -30,9 +30,12 @@ class Homepage extends Component {
 
         return (
             <div className='homepage'>
-                <h1>Welcome to the CloudSave Homepage</h1>
 
-                <h2>Choose a file to upload</h2>
+                <div className='headers-container'>
+                    <h1>Welcome to the CloudSave Homepage</h1>
+
+                    <h2>Choose a file to upload</h2>
+                </div>
 
                 <div className='file-picker'>
                     <form>
@@ -46,6 +49,7 @@ class Homepage extends Component {
                     </form>
 
                     <div className='file-name-display'>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti unde mollitia quis? Tempore labore quam sapiente corporis voluptate eligendi, corrupti esse aliquid dolores minima rerum ex illo at delectus reiciendis?
                     </div>
                 </div>
             </div>
