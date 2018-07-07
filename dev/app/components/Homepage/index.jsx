@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 class Homepage extends Component {
     constructor(props) {
         super(props);
+        const { currentUser } = this.props;
         this.state = {
-            currentFile: ''
+
+            currentFile: '',
+            currentUser,
         }
     }
+
+
 
     handleFileUpload = event => {
         console.log('event is ', event.target.files[0]);
@@ -17,6 +22,17 @@ class Homepage extends Component {
         })
     }
 
+    handleFileNameDisplay = () => {
+        const { currentFile } = this.state;
+
+        if (!currentFile) {
+            return `No file currently selected`;
+        }
+
+        return `${currentFile.name}`;
+
+    }
+
 
 
     handleSubmit = event => {
@@ -24,15 +40,14 @@ class Homepage extends Component {
     }
 
     render() {
-        const { currentUser } = this.props;
-        const { currentFile } = this.state;
+        const { currentFile, currentUser } = this.state;
         console.log('currentUser is ', currentUser);
 
         return (
             <div className='homepage'>
 
                 <div className='headers-container'>
-                    <h1>Welcome to the CloudSave Homepage</h1>
+                    <h1>Welcome {currentUser.first_name} to the CloudSave Homepage!</h1>
 
                     <h2>Choose a file to upload</h2>
                 </div>
@@ -42,14 +57,14 @@ class Homepage extends Component {
                         <div className='upload-btn-container'>
                             <button className='upload-btn'>Upload a file</button>
                             <input name='Upload' onChange={this.handleFileUpload} type='file'
-                                accept='image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document' />
+                                accept='image/*, .pdf, .doc, .docx, .xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document' />
                         </div>
 
                         <button>Submit</button>
                     </form>
 
                     <div className='file-name-display'>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti unde mollitia quis? Tempore labore quam sapiente corporis voluptate eligendi, corrupti esse aliquid dolores minima rerum ex illo at delectus reiciendis?
+                        {this.handleFileNameDisplay()}
                     </div>
                 </div>
             </div>
