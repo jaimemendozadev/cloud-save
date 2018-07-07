@@ -1,3 +1,14 @@
+@mixin submitButton {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
 *:before, *:after {
   margin: 0;
   padding: 0;
@@ -80,6 +91,50 @@ html {
   margin: 0 auto;
 }
 
+.file-picker {
+  border: 1px solid green;
+  display: flex;
+  width: 80%;
+  height: 200px;
+  flex-wrap: wrap;
+
+  form {
+    display: flex;
+    width: 100%;
+  }
+  
+  // See citation
+  .upload-btn-container {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    background-color: rebeccapurple;
+    height: 50px;
+    margin-right: 2em;
+    
+  
+    .upload-btn {
+      @include submitButton(); // controls width for Input field
+      width: 200px;
+    }
+
+    input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      background-color: yellow;
+      // height: 50px;
+    }
+  }
+
+  button {
+    @include submitButton();
+    height: 50px;
+  }
+
+}
 
 .errorMsg {
   color: red;
@@ -94,3 +149,72 @@ html {
     align-items: center;
   }
 }
+
+
+
+
+
+@media only screen and (max-width: 650px) {
+  .file-picker {
+    border: 1px solid green;
+    display: flex;
+    width: 100%;
+    height: 400px;
+    flex-wrap: wrap;
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 80%;
+    }
+    
+    // See citation
+    .upload-btn-container {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      background-color: rebeccapurple;
+      height: 50px;
+      margin: 0 auto 1.5em auto; // set margin to 0 auto to center .upload-btn-container
+      
+    
+      .upload-btn {
+        @include submitButton();
+        width: 200px; // controls width for Input field
+      }
+  
+      input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        background-color: yellow;
+        // height: 50px;
+      }
+    }
+  
+    button {
+      @include submitButton();
+      height: 50px;
+      width: 200px;
+      
+    }
+  
+  }
+
+  
+}
+
+
+/*****************
+* Citations
+******************
+
+.upload-btn-wrapper
+https://blog.benestudio.co/custom-file-upload-button-with-pure-css-5aacf39aa0a
+
+*/

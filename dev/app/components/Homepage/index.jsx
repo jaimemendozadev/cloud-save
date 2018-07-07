@@ -31,11 +31,23 @@ class Homepage extends Component {
         return (
             <div className='homepage'>
                 <h1>Welcome to the CloudSave Homepage</h1>
-                <form>
-                    <label>Choose file to upload</label>
-                    <input onChange={this.handleFileUpload} type='file' />
-                    <button>Submit</button>
-                </form>
+
+                <h2>Choose a file to upload</h2>
+
+                <div className='file-picker'>
+                    <form>
+                        <div className='upload-btn-container'>
+                            <button className='upload-btn'>Upload a file</button>
+                            <input name='Upload' onChange={this.handleFileUpload} type='file'
+                                accept='image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document' />
+                        </div>
+
+                        <button>Submit</button>
+                    </form>
+
+                    <div className='file-name-display'>
+                    </div>
+                </div>
             </div>
         )
     }

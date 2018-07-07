@@ -56,6 +56,48 @@ html {
   border: 1px solid pink;
   margin: 0 auto; }
 
+.file-picker {
+  border: 1px solid green;
+  display: flex;
+  width: 80%;
+  height: 200px;
+  flex-wrap: wrap; }
+  .file-picker form {
+    display: flex;
+    width: 100%; }
+  .file-picker .upload-btn-container {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    background-color: rebeccapurple;
+    height: 50px;
+    margin-right: 2em; }
+    .file-picker .upload-btn-container .upload-btn {
+      border: 2px solid gray;
+      color: gray;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 200px; }
+    .file-picker .upload-btn-container input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      background-color: yellow; }
+  .file-picker button {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px; }
+
 .errorMsg {
   color: red; }
 
@@ -64,3 +106,60 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center; } }
+
+@media only screen and (max-width: 650px) {
+  .file-picker {
+    border: 1px solid green;
+    display: flex;
+    width: 100%;
+    height: 400px;
+    flex-wrap: wrap; }
+    .file-picker form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 80%; }
+    .file-picker .upload-btn-container {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      background-color: rebeccapurple;
+      height: 50px;
+      margin: 0 auto 1.5em auto; }
+      .file-picker .upload-btn-container .upload-btn {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 200px; }
+      .file-picker .upload-btn-container input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        background-color: yellow; }
+    .file-picker button {
+      border: 2px solid gray;
+      color: gray;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      height: 50px;
+      width: 200px; } }
+
+/*****************
+* Citations
+******************
+
+.upload-btn-wrapper
+https://blog.benestudio.co/custom-file-upload-button-with-pure-css-5aacf39aa0a
+
+*/
