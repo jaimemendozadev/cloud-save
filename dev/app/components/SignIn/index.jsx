@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { prepPayload, escapeHtml, handleOnFocus, handleFirstName, handleLastName } from './utils';
-import { initSocialAuth, getSocialAuthUser, resetSocialAuth, tokenSet } from '../../services/redux/actions/Auth'
+import { initSocialAuth, initRegularAuth, getSocialAuthUser, getRegularAuthUser, resetSocialAuth, tokenSet } from '../../services/redux/actions/Auth'
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -85,22 +85,17 @@ class SignIn extends Component {
     }
     handleSubmit = async event => {
         event.preventDefault();
+        const { initRegularAuth, getRegularAuthUser } = this.props;
+
         const { first_name, last_name, email, password } = this.state;
         const payload = prepPayload({ first_name, last_name, email, password });
+        const context = this;
 
-        try {
-            let result = await fetch(`${API_URL}/auth/signup`, payload)
-                .then(res => res.json());
+        // Notify Redux Regular Auth initiated
+        initRegularAuth();
 
-            console.log('await result inside handleSubmit is ', result);
+        getRegularAuthUser(payload, context);
 
-        } catch (error) {
-            console.log('Error from sign in ', error)
-
-            this.setState({
-                signInError: 'There was an error signing in. Try again later.'
-            });
-        }
     }
 
     handleSocialAuth = () => {
@@ -112,11 +107,11 @@ class SignIn extends Component {
     }
 
     checkSocialAuth = () => {
-        const { authInProgress, location, getSocialAuthUser, resetSocialAuth } = this.props;
+        const { SocialAuthInProgress, location, getSocialAuthUser, resetSocialAuth } = this.props;
         const context = this;
 
         //If we've kicked off social auth, look for the token
-        if (authInProgress) {
+        if (SocialAuthInProgress) {
 
             if (location.search && location.search.includes('token')) {
                 const token = location.search.slice(7);
@@ -126,7 +121,7 @@ class SignIn extends Component {
 
                 tokenSet(); // Fire off tokenSet Action
 
-                getSocialAuthUser(token, context, this.handleRedirect);
+                getSocialAuthUser(token, context);
 
                 //We didn't get the token, reset Redux Auth state
             } else {
@@ -183,11 +178,12 @@ class SignIn extends Component {
 
 function mapStateToProps({ authStatus }) {
     return {
-        authInProgress: authStatus.authInProgress
+        SocialAuthInProgress: authStatus.SocialAuthInProgress,
+        RegularAuthInProgress: authStatus.RegularAuthInProgress,
     }
 }
 
-export default connect(mapStateToProps, { initSocialAuth, getSocialAuthUser, resetSocialAuth, tokenSet })(SignIn);
+export default connect(mapStateToProps, { initSocialAuth, initRegularAuth, getSocialAuthUser, getRegularAuthUser, resetSocialAuth, tokenSet })(SignIn);
 
 
 

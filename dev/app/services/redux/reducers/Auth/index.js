@@ -1,13 +1,17 @@
-import {INIT_SOCIAL_AUTH, TOKEN_SET, RESET_SOCIAL_AUTH} from '../../actions/Auth';
+import {INIT_SOCIAL_AUTH, INIT_REGULAR_AUTH, TOKEN_SET, RESET_SOCIAL_AUTH} from '../../actions/Auth';
 
 const initialState = {
-  authInProgress: false,
+  SocialAuthInProgress: false,
+  RegularAuthInProgress: false,
   tokenSet: false,
 }
 
 const authStatusReducer = (state = initialState, action) => {
   switch(action.type){
     case INIT_SOCIAL_AUTH:
+      return {...state, ...action.payload};
+    
+    case INIT_REGULAR_AUTH:
       return {...state, ...action.payload};
     
     case TOKEN_SET:
