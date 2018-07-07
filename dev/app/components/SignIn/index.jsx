@@ -36,12 +36,7 @@ class SignIn extends Component {
 
     handleRedirect = target => {
 
-        console.log('inside handleRedirect')
-        console.log('this.props inside handleRedirect ', this.props)
-
         if (target === 'homepage') {
-            console.log('inside redirect conditional');
-
             this.props.history.push('/homepage');
         }
     }
@@ -150,8 +145,6 @@ class SignIn extends Component {
     }
 
     componentDidMount = () => {
-        console.log('current props in CDM are ', this.props);
-
         this.checkSocialAuth()
     }
 
@@ -160,6 +153,7 @@ class SignIn extends Component {
         const prevRedirectTarget = prevState.redirectTarget;
         const { redirect, redirectTarget } = this.state;
 
+        // If we set a redirect in state, handle the redirect
         if (prevRedirect != redirect && prevRedirectTarget != redirectTarget) {
             this.handleRedirect(redirectTarget)
         }
@@ -168,10 +162,6 @@ class SignIn extends Component {
 
     render() {
         const { first_name, last_name, email, password } = this.state;
-
-        console.log('props inside SignIn render ', this.props)
-
-
 
         return (
             <div className='sign-up'>

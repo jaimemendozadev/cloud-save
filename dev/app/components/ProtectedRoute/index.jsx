@@ -26,16 +26,15 @@ class ProtectedRoute extends Component {
         }
     }
 
-    componentDidMount() {
-
+    componentDidMount = () => {
         const token = localStorage.getItem('token');
 
         console.log('token inside ProtectRoute Homepage CDM ', token);
-
+        // If we get the token from localStorage, rerender component
         if (token) {
             this.setState({
                 haveToken: true
-            })
+            });
         }
 
 
@@ -49,24 +48,20 @@ class ProtectedRoute extends Component {
 
         const { haveToken } = this.state;
 
+        // If Auth process hasn't started, redirect to Homepage
         if (authInProgress === false) {
             this.props.history.push('/homepage');
         }
 
+        // If we have the token, handleProtectedRoute
         if (haveToken) {
             return this.handleProtectedRoute();
         }
 
+        // Otherwise, render placeholder text and go to CDM
         else {
             return <h3>Waiting for authentication...</h3>
         }
-
-
-
-
-
-
-
     }
 }
 
