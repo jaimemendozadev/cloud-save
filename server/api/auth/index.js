@@ -16,9 +16,3 @@ Router.post('/login', (req, res) => console.log('Login a User'))
 
 
 module.exports = Router;
-
-
-
-
-
-
