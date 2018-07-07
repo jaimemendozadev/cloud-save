@@ -87,7 +87,14 @@ class SignIn extends Component {
         event.preventDefault();
         const { initRegularAuth, getRegularAuthUser } = this.props;
 
-        const { first_name, last_name, email, password } = this.state;
+        const { password } = this.state;
+        let { first_name, last_name, email } = this.state;
+
+        // Make sure excess spacing doesn't get saved in DB
+        first_name = first_name.trim();
+        last_name = last_name.trim();
+        email = email.trim();
+
         const payload = prepPayload({ first_name, last_name, email, password });
         const context = this;
 

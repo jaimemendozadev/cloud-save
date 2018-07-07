@@ -40,14 +40,14 @@ class Homepage extends Component {
     }
 
     render() {
-        const { currentFile, currentUser } = this.state;
-        console.log('currentUser is ', currentUser);
+        const { currentFile, currentUser: { first_name } } = this.state;
+
 
         return (
             <div className='homepage'>
 
                 <div className='headers-container'>
-                    <h1>Welcome {currentUser.first_name} to the CloudSave Homepage!</h1>
+                    <h1>Welcome {first_name ? first_name : ''} to the CloudSave Homepage!</h1>
 
                     <h2>Choose a file to upload</h2>
                 </div>
