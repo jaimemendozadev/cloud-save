@@ -1,8 +1,8 @@
 const express = require('express');
 const Router = express.Router();
-const { upload } = require('./controllers');
+const { getSignedUrl } = require('./controllers');
 
-Router.post('/upload', upload);
+Router.post('/upload', getSignedUrl);
 
 
 module.exports = Router;

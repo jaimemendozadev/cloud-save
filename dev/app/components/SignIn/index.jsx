@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { prepPayload, escapeHtml, handleOnFocus, handleFirstName, handleLastName } from './utils';
+import { prepPayload, escapeHtml } from './utils';
 import { initSocialAuth, initRegularAuth, getSocialAuthUser, getRegularAuthUser, resetSocialAuth, tokenSet } from '../../services/redux/actions/Auth'
 
 const API_URL = 'http://localhost:3000/api';
@@ -140,6 +140,7 @@ class SignIn extends Component {
     }
 
     componentDidMount = () => {
+        // Social Auth triggers page refresh, so checkSocialAuth in CDM
         this.checkSocialAuth()
     }
 
