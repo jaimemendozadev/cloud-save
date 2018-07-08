@@ -5,7 +5,7 @@ const {Document, Drive} = require('../../services/DB/Models');
 const {generateAWSKeyUrl} = require('./utils');
 
 
-const getSignedUrl = async(req, res) => {
+const getSignedUrl = (req, res) => {
     const { name, type, extension, targetLocation } = req.body;
     const userID = req.user._id;
 
@@ -19,7 +19,7 @@ const getSignedUrl = async(req, res) => {
     }
 
     // Get preSignedUrl from S3
-    s3.getSignedUrl('putObject', payload, (err, url) => {
+    s3.getSignedUrl('putObject', payload, async(err, url) => {
 
       if(err) {
         res.send({errorMessage: 'There was a problem uploading the file. Try again later.'});
