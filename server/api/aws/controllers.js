@@ -35,6 +35,8 @@ const getSignedUrl = (req, res) => {
       // Get and update User's Drive with new Document
       let userDrive = await Drive.find({owner: userID});
 
+      userDrive = userDrive.pop();
+
       console.log('found userDrive ', userDrive);
 
       userDrive.root.push(newDocument._id);

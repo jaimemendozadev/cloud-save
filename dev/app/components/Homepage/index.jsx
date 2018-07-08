@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { prepAWSPayload, getFileType } from './utils';
+import { prepAWSPayload, getFileType, uploadFileToAWS } from './utils';
 import { uploadFile } from '../../services/redux/actions/aws';
 
 class Homepage extends Component {
@@ -14,6 +14,7 @@ class Homepage extends Component {
             currentFileObj: {},
             currentUser,
             drive,
+            errorMessage: '',
         }
     }
 
@@ -21,7 +22,6 @@ class Homepage extends Component {
 
     handleFileUpload = event => {
         // MVP goal: one file upload
-        console.log('currentFile is  ', event.target.files[0]);
 
         const currentFile = {
             name: event.target.files[0].name,
@@ -39,7 +39,11 @@ class Homepage extends Component {
     }
 
     handleFileNameDisplay = () => {
-        const { currentFile } = this.state;
+        const { currentFile, errorMessage } = this.state;
+
+        if (errorMessage) {
+            return <span className='errorMsg'>{errorMessage}</span>;
+        }
 
         if (!currentFile.name) {
             return `No file currently selected`;
@@ -57,7 +61,7 @@ class Homepage extends Component {
 
 
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
         const { currentFile, currentFileObj, targetLocation } = this.state;
         const { uploadFile } = this.props;
@@ -67,10 +71,19 @@ class Homepage extends Component {
 
         const AWS_Payload = prepAWSPayload('POST', token, currentFile)
 
-        console.log('AWS_Payload ', AWS_Payload)
+        // Kicks off getting preSignedUrl, Doc/Drive creation/update on Server
+        // & file upload on FE
+        const finalResult = await uploadFileToAWS(AWS_Payload, currentFileObj, currentFile.type);
 
-        // Kicks off Redux uploadFile action
-        uploadFile(AWS_Payload, currentFileObj, currentFile.type);
+        console.log('finalResult inside handleSubmit ', finalResult)
+
+        if (finalResult === 'File upload error') {
+            this.setState({
+                errorMessage: 'There was an error uploading the file. Please try again later.'
+            });
+        }
+
+
     }
 
 

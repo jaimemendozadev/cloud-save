@@ -32,7 +32,6 @@ class ProtectedRoute extends Component {
     componentDidMount = () => {
         const token = localStorage.getItem('token');
 
-        console.log('token inside ProtectRoute Homepage CDM ', token);
         // If we get the token from localStorage, rerender component
         if (token) {
             this.setState({
@@ -42,9 +41,7 @@ class ProtectedRoute extends Component {
     }
 
     render() {
-        console.log('inside ProtectedRoute render')
         const { RegularAuthInProgress, SocialAuthInProgress } = this.state;
-        console.log('props inside protected route ', this.props)
 
         const { haveToken } = this.state;
 
