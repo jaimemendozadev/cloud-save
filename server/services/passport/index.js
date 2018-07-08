@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy({
 
     try {
       // First, try to see if we already have the user
-      savedUser = await User.find({ email: profile.emails[0].value }).populate('drive').exec();
+      savedUser = await User.find({ email: profile.emails[0].value });
 
       // If we already saved the User, send the savedUser to Google callback
       if (savedUser.length) {
@@ -80,7 +80,7 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
   try {
   
     // Find User in DB
-    let savedUser = await User.find({email: userEmail}).populate('drive').exec();
+    let savedUser = await User.find({email: userEmail});
 
     savedUser = savedUser.pop();
 

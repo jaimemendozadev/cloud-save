@@ -59,7 +59,7 @@ class Homepage extends Component {
             return `Looks like your Drive is empty. Please upload a new file to the cloud!`
         }
 
-        drive.map(document => {
+        return drive.map(document => {
             const { original_file_name, aws_url, file_type } = document;
             return <Document
                 original_file_name={original_file_name}

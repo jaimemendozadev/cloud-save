@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const {Drive} = require('../../services/DB/Models')
 const {JWTSecret} = process.env
 
 const generateJWT = email => {
