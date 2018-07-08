@@ -13,13 +13,16 @@ export const fetchUpdatedDrive = () => {
       .then(result => result.json())
       .then(updatedDrive => {
 
+        const drive = {
+          drive: updatedDrive,
+        }
+
         // Send updatedDrive to Redux store
-        dispatch({type: UPDATE_USER_DRIVE, payload: updatedDrive});
+        dispatch({type: UPDATE_USER_DRIVE, payload: drive});
       })
       .catch(error => {
         console.log('error getting updatedDrive ', error)
       });
-
   }
 
 }

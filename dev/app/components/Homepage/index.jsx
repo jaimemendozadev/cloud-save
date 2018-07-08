@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Document from '../Document/index.jsx';
 import { prepAWSPayload, getFileType, uploadFileToAWS } from './utils';
 import { fetchUpdatedDrive } from '../../services/redux/actions/User';
 
@@ -57,6 +58,15 @@ class Homepage extends Component {
         if (!drive.length) {
             return `Looks like your Drive is empty. Please upload a new file to the cloud!`
         }
+
+        drive.map(document => {
+            const { original_file_name, aws_url, file_type } = document;
+            return <Document
+                original_file_name={original_file_name}
+                aws_url={aws_url}
+                file_type={file_type}
+            />
+        })
     }
 
 
