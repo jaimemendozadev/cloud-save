@@ -27,8 +27,6 @@ passport.use(new GoogleStrategy({
       // If we already saved the User, send the savedUser to Google callback
       if (savedUser.length) {
         savedUser = savedUser.pop();
-
-        console.log('savedUser with populate Drive from Google OAuth is ', savedUser)
         
         callback(null, newUser)
 
@@ -40,8 +38,6 @@ passport.use(new GoogleStrategy({
         newUser = await new User(newUser);
 
         newUser = await newUser.save();
-
-        console.log('newUser we pass to Google Callback ', newUser)
       
         // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
         callback(null, newUser)
@@ -73,8 +69,6 @@ opts.secretOrKey = process.env.JWTSecret;
 
 passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
 
-  console.log('jwt_payload is ', jwt_payload)
-
   const userEmail = jwt_payload.email;
 
   try {
@@ -83,8 +77,6 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
     let savedUser = await User.find({email: userEmail});
 
     savedUser = savedUser.pop();
-
-    console.log('savedUser with populate Drive from JWT Passport is ', savedUser)
 
     // IMPORTANT: Must pass null, as first argument, else you will get an error on FE
     callback(null, savedUser)

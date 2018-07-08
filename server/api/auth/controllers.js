@@ -14,10 +14,7 @@ const signup = async (req, res) => {
     if (savedUser.length) {
       savedUser = savedUser.pop();
 
-
       const userID = savedUser._id;
-
-      console.log('userID is ', userID)
 
       savedUser = extractUserDBInfo(savedUser);
 
@@ -26,11 +23,7 @@ const signup = async (req, res) => {
 
       userDrive = userDrive.pop();
 
-      console.log('found userDrive is ', userDrive)
-
       savedUser.drive = userDrive.root;
-
-      console.log('savedUser with drive in signup ', savedUser)
 
       userToken = generateJWT(savedUser.email);
       
@@ -72,8 +65,6 @@ const foundUser = async (req, res) => {
   userDrive = userDrive.pop();
 
   userInDB.drive = userDrive.root;
-
-  console.log('extracted userInDB is ', userInDB)
 
   res.send(userInDB);
 }
