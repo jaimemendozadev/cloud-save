@@ -39,7 +39,7 @@ const uploadFileWithUrl = async (signedUrl, file, fileType) => {
         body: file
       };
       
-      let resultFromAWS = await fetch('http://somerandomurlthatdoesnotexist.com', payload)
+      let resultFromAWS = await fetch(signedUrl, payload)
       .then(result => {
         console.log('result from S3 file upload ', result);
 

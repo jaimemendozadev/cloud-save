@@ -1,4 +1,4 @@
-import {prepAuthPayload, prepReduxActionPayload} from './utils';
+import {prepAuthPayload} from '../utils';
 export const INIT_SOCIAL_AUTH = 'INIT_SOCIAL_AUTH';
 export const INIT_REGULAR_AUTH = 'INIT_REGULAR_AUTH';
 export const APP_INIT = 'APP_INIT';

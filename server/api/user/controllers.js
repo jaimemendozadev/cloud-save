@@ -1,20 +1,15 @@
-const {User} = require('../../services/DB/Models')
+const {Drive} = require('../../services/DB/Models')
 
 const getUserDrive = async(req, res) => {
-  const email = req.user.email;
+  
+  const authedUserID = req.user._id;
 
-  // Find the User
-  let foundUser = await User.find({email});
+  let userDrive = await Drive.find({owner: authedUserID}).populate('root').exec();
 
-  foundUser = foundUser.pop();
-
-  // Populate the User Drive
-  foundUser = await foundUser.populate('Drive').exec();
-
-  const userDrive = foundUser.drive;
+  userDrive = userDrive.pop();
   
   // Send Drive to FE
-  res.send(userDrive);
+  res.send(userDrive.root);
   
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { prepAWSPayload, getFileType, uploadFileToAWS } from './utils';
-import { uploadFile } from '../../services/redux/actions/aws';
+import { fetchUpdatedDrive } from '../../services/redux/actions/User';
 
 class Homepage extends Component {
     constructor(props) {
@@ -64,7 +64,7 @@ class Homepage extends Component {
     handleSubmit = async event => {
         event.preventDefault();
         const { currentFile, currentFileObj, targetLocation } = this.state;
-        const { uploadFile } = this.props;
+        const { fetchUpdatedDrive } = this.props;
 
         currentFile.targetLocation = targetLocation;
         const token = localStorage.getItem('token');
@@ -83,14 +83,14 @@ class Homepage extends Component {
             });
         }
 
-
+        // Trigger Redux Action to get updatedDrive
+        fetchUpdatedDrive()
     }
 
 
 
     render() {
         const { drive, currentUser: { first_name } } = this.state;
-
 
         return (
             <div className='homepage'>
@@ -136,4 +136,4 @@ function mapStateToProps({ currentUser }) {
     }
 }
 
-export default connect(mapStateToProps, { uploadFile })(Homepage);
+export default connect(mapStateToProps, { fetchUpdatedDrive })(Homepage);
