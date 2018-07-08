@@ -3,7 +3,7 @@ const Router = express.Router();
 const { getSignedUrl, uploadFile } = require('./controllers');
 
 
-Router.get('/signurl', getSignedUrl);
+Router.post('/signurl', getSignedUrl);
 Router.post('/upload', uploadFile);
 
 

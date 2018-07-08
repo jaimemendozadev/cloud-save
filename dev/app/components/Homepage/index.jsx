@@ -37,7 +37,7 @@ class Homepage extends Component {
     handleFileNameDisplay = () => {
         const { currentFile } = this.state;
 
-        if (!currentFile) {
+        if (!currentFile.name) {
             return `No file currently selected`;
         }
 
@@ -61,7 +61,7 @@ class Homepage extends Component {
         currentFile.targetLocation = targetLocation;
         const token = localStorage.getItem('token');
 
-        const AWS_Payload = prepAWSPayload('GET', token, currentFile)
+        const AWS_Payload = prepAWSPayload('POST', token, currentFile)
 
         // Kicks off Redux uploadFile action
         uploadFile(AWS_Payload, currentFileObj);
@@ -83,7 +83,7 @@ class Homepage extends Component {
                     </div>
 
                     <div className='file-picker'>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <div className='upload-btn-container'>
                                 <button className='upload-btn'>Upload a file</button>
                                 <input name='Upload' onChange={this.handleFileUpload} type='file'
