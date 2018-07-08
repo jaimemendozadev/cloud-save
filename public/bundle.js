@@ -223,22 +223,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
   !*** ./dev/app/services/redux/actions/aws/index.js ***!
   \*****************************************************/
 /*! exports provided: FILE_UPLOAD, uploadFile */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FILE_UPLOAD\", function() { return FILE_UPLOAD; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"uploadFile\", function() { return uploadFile; });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./dev/app/services/redux/actions/aws/utils.js\");\nconst FILE_UPLOAD = 'FILE_UPLOAD';\nconst API_URL = 'http://localhost:3000/api'\n\n\nconst uploadFile = (AWS_Paylaod, currentFileObj, fileType) => {\n  return (dispatch) => {\n    fetch(`${API_URL}/aws/signurl`, AWS_Paylaod)\n      .then(response => response.json())\n      .then(serverResponse => {\n        const {preSignedUrl} = serverResponse;\n\n        const awsStatusUpdate = {\n            gettingSignedUrl: true,\n          }\n         \n          dispatch({type: FILE_UPLOAD, payload: awsStatusUpdate });\n  \n          console.log('serverResponse for /aws/signurl ', serverResponse);\n  \n          // Make second API call to save currentFileOb in S3\n\n          let result = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"uploadFileWithUrl\"])(preSignedUrl, currentFileObj, fileType)\n\n          console.log('result from final file upload ', result)\n      })\n  }\n}\n\n\n\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/aws/index.js?");
-
-/***/ }),
-
-/***/ "./dev/app/services/redux/actions/aws/utils.js":
-/*!*****************************************************!*\
-  !*** ./dev/app/services/redux/actions/aws/utils.js ***!
-  \*****************************************************/
-/*! exports provided: uploadFileWithUrl, uploadFileToAWS */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"uploadFileWithUrl\", function() { return uploadFileWithUrl; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"uploadFileToAWS\", function() { return uploadFileToAWS; });\nconst API_URL = 'http://localhost:3000/api'\n\n\n\nconst uploadFileWithUrl = async (signedUrl, file, fileType) => {\n    const payload = {\n        method: 'PUT', // Must be CAPITALIZED e.g. 'POST'\n        headers: {\n            'Content-Type': fileType, // MUST specify Content-Type\n        },\n        body: file\n      };\n      \n      let resultFromAWS = await fetch(signedUrl, payload)\n      .then(result => {\n        console.log('result from S3 file upload ', result);\n\n          return 'Success';\n      })\n      .catch(error => {\n        console.log('error saving file in S3 ', error)\n          return 'File upload error';\n      })\n\n      console.log('resultFromAWS ', resultFromAWS);\n\n      return resultFromAWS;\n}\n\n\n\n\nconst uploadFileToAWS = async (AWS_Paylaod, currentFileObj, fileType) => {\n\n    // Get preSignedUrl from Server\n    let serverResponse = await fetch(`${API_URL}/aws/signurl`, AWS_Paylaod).then(response => response.json());\n  \n        \n    const {preSignedUrl} = serverResponse;\n    \n    // Make second API call to save currentFileObj in S3\n  \n    let result = await uploadFileWithUrl(preSignedUrl, currentFileObj, fileType)\n  \n    console.log('result from final file upload ', result)\n  \n  }\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/aws/utils.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (1:14)\\nYou may need an appropriate loader to handle this file type.\\n> export const  = 'FILE_UPLOAD';\\n| \\n| \");\n\n//# sourceURL=webpack:///./dev/app/services/redux/actions/aws/index.js?");
 
 /***/ }),
 
@@ -278,18 +265,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _act
 
 /***/ }),
 
-/***/ "./dev/app/services/redux/reducers/aws/index.js":
-/*!******************************************************!*\
-  !*** ./dev/app/services/redux/reducers/aws/index.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_aws__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/aws */ \"./dev/app/services/redux/actions/aws/index.js\");\n\n\nconst initialState = {\n  gettingSignedUrl: false,\n}\n\n\nconst awsStatusReducer = (state = initialState, action) => {\n    switch(action.type){\n      case _actions_aws__WEBPACK_IMPORTED_MODULE_0__[\"FILE_UPLOAD\"]:\n        return {...state, ...action.payload};\n    \n      default:\n        return state;\n    }\n}\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (awsStatusReducer);\n\n\n//# sourceURL=webpack:///./dev/app/services/redux/reducers/aws/index.js?");
-
-/***/ }),
-
 /***/ "./dev/app/services/redux/reducers/index.js":
 /*!**************************************************!*\
   !*** ./dev/app/services/redux/reducers/index.js ***!
@@ -298,7 +273,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _act
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-persist */ \"./node_modules/redux-persist/es/index.js\");\n/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-persist/lib/storage */ \"./node_modules/redux-persist/lib/storage/index.js\");\n/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Auth */ \"./dev/app/services/redux/reducers/Auth/index.js\");\n/* harmony import */ var _aws__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./aws */ \"./dev/app/services/redux/reducers/aws/index.js\");\n/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./User */ \"./dev/app/services/redux/reducers/User/index.js\");\n\n\n\n\n\n\nconst config = {\n  key: 'primary',\n  storage: (redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1___default())\n}\n\nlet rootReducer =  Object(redux_persist__WEBPACK_IMPORTED_MODULE_0__[\"persistCombineReducers\"])(\n  config,\n  {\n    authStatus: _Auth__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n    awsStatus: _aws__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n    currentUser: _User__WEBPACK_IMPORTED_MODULE_4__[\"default\"],\n  }\n)\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./dev/app/services/redux/reducers/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-persist */ \"./node_modules/redux-persist/es/index.js\");\n/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-persist/lib/storage */ \"./node_modules/redux-persist/lib/storage/index.js\");\n/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Auth */ \"./dev/app/services/redux/reducers/Auth/index.js\");\n/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./User */ \"./dev/app/services/redux/reducers/User/index.js\");\n\n\n\n\n\nconst config = {\n  key: 'primary',\n  storage: (redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_1___default())\n}\n\nlet rootReducer =  Object(redux_persist__WEBPACK_IMPORTED_MODULE_0__[\"persistCombineReducers\"])(\n  config,\n  {\n    authStatus: _Auth__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n    currentUser: _User__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n  }\n)\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./dev/app/services/redux/reducers/index.js?");
 
 /***/ }),
 
