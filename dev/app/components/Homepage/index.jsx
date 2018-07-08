@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { prepAWSPayload } from './utils';
+import { prepAWSPayload, getFileType } from './utils';
 import { uploadFile } from '../../services/redux/actions/aws';
 
 class Homepage extends Component {
@@ -27,6 +27,10 @@ class Homepage extends Component {
             name: event.target.files[0].name,
             type: event.target.files[0].type,
         }
+
+        const extension = getFileType(currentFile.type);
+
+        currentFile.extension = extension;
 
         this.setState({
             currentFile,
@@ -89,7 +93,7 @@ class Homepage extends Component {
                             <div className='upload-btn-container'>
                                 <button className='upload-btn'>Upload a file</button>
                                 <input name='Upload' onChange={this.handleFileUpload} type='file'
-                                    accept='image/*, .pdf, .doc, .docx, .xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document' />
+                                    accept='image/*, .pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document' />
                             </div>
 
                             <button>Submit</button>
