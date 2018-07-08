@@ -71,7 +71,6 @@ const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWTSecret;
 
-
 passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
 
   console.log('jwt_payload is ', jwt_payload)
@@ -84,8 +83,6 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, callback) => {
     let savedUser = await User.find({email: userEmail}).populate('drive').exec();
 
     savedUser = savedUser.pop();
-
-    savedUser = savedUser.populate('drive').exec();
 
     console.log('savedUser with populate Drive from JWT Passport is ', savedUser)
 

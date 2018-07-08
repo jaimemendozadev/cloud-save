@@ -63,6 +63,8 @@ class Homepage extends Component {
 
         const AWS_Payload = prepAWSPayload('POST', token, currentFile)
 
+        console.log('AWS_Payload ', AWS_Payload)
+
         // Kicks off Redux uploadFile action
         uploadFile(AWS_Payload, currentFileObj);
     }
