@@ -86,13 +86,28 @@ html {
 
 .homepage {
   width: 70%;
-  // height: 100vh;
+  height: 100vh;
   border: 1px solid pink;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   padding: 2em;
 }
+
+/* Column Styling
+.homepage {
+  width: 70%;
+  height: 100vh;
+  border: 1px solid pink;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2em;
+}
+*/
+
+
 
 .headers-container {
   height: 200px;
@@ -153,6 +168,10 @@ html {
 
 }
 
+.drive-display {
+  font-size: 1.5em;
+  border: 1px solid goldenrod;
+}
 
 
 
