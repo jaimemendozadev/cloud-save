@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Document from '../Document/index.jsx';
 import { prepAWSPayload, getFileType, uploadFileToAWS } from './utils';
 import { fetchUpdatedDrive } from '../../services/redux/actions/User';
+import { userLogOut } from '../../services/redux/actions/Auth';
 
 class Homepage extends Component {
     constructor(props) {
@@ -62,6 +63,7 @@ class Homepage extends Component {
         return drive.map(document => {
             const { original_file_name, aws_url, file_type } = document;
             return <Document
+                key={`${original_file_name}-${aws_url}`}
                 original_file_name={original_file_name}
                 aws_url={aws_url}
                 file_type={file_type}
@@ -108,6 +110,8 @@ class Homepage extends Component {
                     <div className='headers-container'>
                         <h1>Welcome {first_name ? first_name : ''} to the CloudSave Homepage!</h1>
 
+                        <button className='logout-btn'>Logout</button>
+
                         <h2>Choose a file to upload</h2>
                     </div>
 
@@ -146,4 +150,4 @@ function mapStateToProps({ currentUser }) {
     }
 }
 
-export default connect(mapStateToProps, { fetchUpdatedDrive })(Homepage);
+export default connect(mapStateToProps, { fetchUpdatedDrive, userLogOut })(Homepage);

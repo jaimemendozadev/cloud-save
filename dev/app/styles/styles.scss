@@ -179,6 +179,10 @@ html {
 }
 
 
+.logout-btn {
+  @include submitButton();
+}
+
 
 .errorMsg {
   color: red;

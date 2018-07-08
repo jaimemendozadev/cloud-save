@@ -4,6 +4,7 @@ export const INIT_REGULAR_AUTH = 'INIT_REGULAR_AUTH';
 export const APP_INIT = 'APP_INIT';
 export const TOKEN_SET = 'TOKEN_SET';
 export const RESET_SOCIAL_AUTH = 'RESET_SOCIAL_AUTH';
+export const LOG_OUT = 'LOG_OUT';
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -80,10 +81,17 @@ export const getRegularAuthUser = (payload, context) => {
   } 
 }
 
-
 export const resetSocialAuth = () => {
   return {
     type: RESET_SOCIAL_AUTH,
+  }
+}
+
+export const userLogOut = () => {
+  //localStorage.clear()
+  return {
+    type: LOG_OUT,
+    payload: {signedOut: true}
   }
 }
 

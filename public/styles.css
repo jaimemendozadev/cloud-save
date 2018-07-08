@@ -130,6 +130,15 @@ html {
   border: 1px solid grey;
   padding: 1em; }
 
+.logout-btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold; }
+
 .errorMsg {
   color: red; }
 
