@@ -3,7 +3,6 @@ const uuidv1 = require('uuid/v1');
 const {AWS_BUCKET_NAME} = process.env;
 
 const getSignedUrl = (req, res) => {
-    console.log('req.body inside aws getSignedURL ', req.body)
     const currentUser = req.user;
 
     const { name, type, extension, targetLocation } = req.body;
@@ -14,26 +13,16 @@ const getSignedUrl = (req, res) => {
 
     // For MVP, only save files in Root folder/drive
     const Key = `${baseFolder}${targetLocation}${awsFileName}`;
-    
- 
-    // Get file/Key name
-    // Create unique name for file/Key name with uuid
-    // Save uuid-Key with regular key name in DB
-    // Make request for presigned URL
-    
-
-    /*
-    const Key: 
 
     const payload = {
       Bucket: AWS_BUCKET_NAME,
+      ContentType: type,
       Key, 
     }
-    */
-  
-    res.send({message: 'Hit getSignedUrl for aws'});
 
-  // s3.getSignedUrl('getObject')
+    s3.getSignedUrl('putObject', payload, (err, url) => {
+      res.send({preSignedUrl: url});
+    });
 }
 
 

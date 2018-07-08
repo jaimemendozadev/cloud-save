@@ -70,7 +70,7 @@ class Homepage extends Component {
         console.log('AWS_Payload ', AWS_Payload)
 
         // Kicks off Redux uploadFile action
-        uploadFile(AWS_Payload, currentFileObj);
+        uploadFile(AWS_Payload, currentFileObj, currentFile.type);
     }
 
 
