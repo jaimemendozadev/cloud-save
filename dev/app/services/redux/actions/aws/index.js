@@ -19,7 +19,9 @@ export const uploadFile = (AWS_Paylaod, currentFileObj, fileType) => {
   
           // Make second API call to save currentFileOb in S3
 
-          uploadFileWithUrl(preSignedUrl, currentFileObj, fileType)
+          let result = uploadFileWithUrl(preSignedUrl, currentFileObj, fileType)
+
+          console.log('result from final file upload ', result)
       })
   }
 }

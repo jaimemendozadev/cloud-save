@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 
 const DocumentSchema = new Schema({
   owner: {type: Schema.ObjectId, ref: 'User'},
-  file_name: String,
-  file_type: String,
+  original_file_name: String,
   aws_key: String,
+  aws_url: String,
+  file_type: String,
 });
 
 const Document = mongoose.model('Document', DocumentSchema);
