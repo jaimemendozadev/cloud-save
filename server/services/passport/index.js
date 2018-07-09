@@ -28,7 +28,7 @@ passport.use(new GoogleStrategy({
       if (savedUser.length) {
         savedUser = savedUser.pop();
         
-        callback(null, newUser)
+        callback(null, savedUser)
 
       } else {
         // Get extract the User's Google profile, save to DB, and send to Callback

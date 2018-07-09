@@ -1,5 +1,5 @@
 import {APP_INIT, START_LOG_OUT} from '../../actions/Auth';
-import {UPDATE_USER_DRIVE} from '../../reducers/User';
+import {UPDATE_USER_DRIVE} from '../../actions/User';
 
 const initialState = {
     first_name: '',

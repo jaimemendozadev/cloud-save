@@ -12,7 +12,9 @@ export const fetchUpdatedDrive = () => {
     fetch(`${API_URL}/user/drive`, payload)
       .then(result => result.json())
       .then(updatedDrive => {
-
+        
+        console.log('updatedDrive from server ', updatedDrive);
+        
         const drive = {
           drive: updatedDrive,
         }
