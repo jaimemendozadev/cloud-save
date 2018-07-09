@@ -18,7 +18,6 @@ const App = () => (
 					<Route exact path='/' component={SplashPage} />
 					<Route path='/signin' component={SignIn} />
 					<ProtectedRoute path='/homepage' component={Homepage} />
-
 				</Switch>
 			</Router>
 		</PersistGate>

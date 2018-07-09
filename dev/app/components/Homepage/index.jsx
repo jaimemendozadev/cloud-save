@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Document from '../Document/index.jsx';
 import { prepAWSPayload, getFileType, uploadFileToAWS } from './utils';
 import { fetchUpdatedDrive } from '../../services/redux/actions/User';
-import { userLogOut } from '../../services/redux/actions/Auth';
+import { startUserLogOut } from '../../services/redux/actions/Auth';
 
 class Homepage extends Component {
     constructor(props) {
@@ -71,7 +71,14 @@ class Homepage extends Component {
         })
     }
 
+    handleLogOut = () => {
+        const { startUserLogOut } = this.props;
 
+        localStorage.clear();
+
+        startUserLogOut();
+
+    }
 
     handleSubmit = async event => {
         event.preventDefault();
@@ -103,6 +110,8 @@ class Homepage extends Component {
 
     render() {
         const { drive, currentUser: { first_name } } = this.state;
+        console.log('Homepage renders')
+        console.log('this.props inside Homepage ', this.props)
 
         return (
             <div className='homepage'>
@@ -110,7 +119,7 @@ class Homepage extends Component {
                     <div className='headers-container'>
                         <h1>Welcome {first_name ? first_name : ''} to the CloudSave Homepage!</h1>
 
-                        <button className='logout-btn'>Logout</button>
+                        <button onClick={this.handleLogOut} className='logout-btn'>Logout</button>
 
                         <h2>Choose a file to upload</h2>
                     </div>
@@ -150,4 +159,4 @@ function mapStateToProps({ currentUser }) {
     }
 }
 
-export default connect(mapStateToProps, { fetchUpdatedDrive, userLogOut })(Homepage);
+export default connect(mapStateToProps, { fetchUpdatedDrive, startUserLogOut })(Homepage);

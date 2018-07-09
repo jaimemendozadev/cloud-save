@@ -148,6 +148,8 @@ class SignIn extends Component {
         const { first_name, last_name, email, password, redirect, redirectTarget } = this.state;
         const { RegularAuthInProgress } = this.props;
 
+        console.log('this.props inside Signin ', this.props)
+
         if (redirect && redirectTarget) {
             return <Redirect to={`/${redirectTarget}`} />
         }

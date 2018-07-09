@@ -4,7 +4,9 @@ export const INIT_REGULAR_AUTH = 'INIT_REGULAR_AUTH';
 export const APP_INIT = 'APP_INIT';
 export const TOKEN_SET = 'TOKEN_SET';
 export const RESET_SOCIAL_AUTH = 'RESET_SOCIAL_AUTH';
+export const START_LOG_OUT = 'START_LOG_OUT';
 export const LOG_OUT = 'LOG_OUT';
+import { PURGE } from 'redux-persist';
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -87,12 +89,28 @@ export const resetSocialAuth = () => {
   }
 }
 
-export const userLogOut = () => {
-  //localStorage.clear()
+export const startUserLogOut = () => {
+  console.log('PURGE IS ', PURGE)
   return {
-    type: LOG_OUT,
-    payload: {signedOut: true}
+    type: START_LOG_OUT,
+    payload: {logOutUser: true}
   }
 }
 
+
+/*
+export const startUserLogOut = () => {
+ 
+  return {
+    type: PURGE,
+  }
+}
+*/
+
+export const logOut = () => {
+  return {
+    type: LOG_OUT,
+    payload: PURGE
+  }
+}
    

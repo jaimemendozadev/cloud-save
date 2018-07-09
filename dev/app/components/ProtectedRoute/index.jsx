@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logOut } from '../../services/redux/actions/Auth';
 
 class ProtectedRoute extends Component {
     constructor(props) {
         super(props);
-        const { RegularAuthInProgress, SocialAuthInProgress } = this.props;
+        const { RegularAuthInProgress, SocialAuthInProgress, logOutUser } = this.props;
 
         this.state = {
             haveToken: false,
             RegularAuthInProgress,
             SocialAuthInProgress,
+            logOutUser,
         }
     }
 
@@ -25,8 +27,19 @@ class ProtectedRoute extends Component {
                 )} />
             )
         } else {
-            this.props.history.push('/signin');
+            // this.props.history.push('/signin');
+            return <Redirect to='/signin' />
         }
+    }
+
+    handleLogOut = () => {
+        const { logOut } = this.props;
+
+        // localStorage.clear();
+
+        logOut();
+
+        this.props.history.push('/signin');
     }
 
     componentDidMount = () => {
@@ -40,10 +53,34 @@ class ProtectedRoute extends Component {
         }
     }
 
+    /*
+    componentDidUpdate = (_prevProps, prevState, _snapshot) => {
+        const { logOutUser } = this.state;
+
+        if (prevState.logOutUser != logOutUser) {
+            this.handleLogOut();
+        }
+    }
+    */
+
     render() {
-        const { RegularAuthInProgress, SocialAuthInProgress } = this.state;
+        console.log('protected route rendering')
+        console.log('this.props inside ProtectedRoute ', this.props)
+
+        const { RegularAuthInProgress, SocialAuthInProgress, logOutUser } = this.state;
 
         const { haveToken } = this.state;
+
+        if (logOutUser === true) {
+            console.log('inside logOutUser conditional')
+            const { logOut } = this.props;
+
+            // localStorage.clear();
+
+            logOut();
+
+            return <Redirect to='/signin' />
+        }
 
         // If neither Auth process has started, redirect to Homepage
         if (RegularAuthInProgress === false && SocialAuthInProgress === false) {
@@ -63,11 +100,12 @@ class ProtectedRoute extends Component {
 }
 
 
-function mapStateToProps({ authStatus }) {
+function mapStateToProps({ authStatus: { SocialAuthInProgress, RegularAuthInProgress, tokenSet, logOutUser } }) {
     return {
-        SocialAuthInProgress: authStatus.SocialAuthInProgress,
-        RegularAuthInProgress: authStatus.RegularAuthInProgress,
-        tokenSet: authStatus.tokenSet,
+        SocialAuthInProgress,
+        RegularAuthInProgress,
+        tokenSet,
+        logOutUser,
     }
 }
-export default connect(mapStateToProps, null)(ProtectedRoute);
+export default connect(mapStateToProps, { logOut })(ProtectedRoute);

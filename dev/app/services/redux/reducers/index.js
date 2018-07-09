@@ -5,7 +5,7 @@ import currentUserReducer from './User';
 
 const config = {
   key: 'primary',
-  storage
+  storage,
 }
 
 let rootReducer =  persistCombineReducers(

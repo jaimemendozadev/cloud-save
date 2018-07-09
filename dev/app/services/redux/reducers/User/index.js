@@ -1,4 +1,4 @@
-import {APP_INIT} from '../../actions/Auth';
+import {APP_INIT, LOG_OUT, START_LOG_OUT} from '../../actions/Auth';
 import {UPDATE_USER_DRIVE} from '../../reducers/User';
 
 const initialState = {
@@ -17,6 +17,12 @@ const currentUserReducer = (state = initialState, action) => {
     
       case UPDATE_USER_DRIVE:
         return {...state, ...action.payload};
+      
+      case LOG_OUT:
+        return {...state, ...initialState};
+
+      case START_LOG_OUT:
+        return {};
       
       default:
         return state;
