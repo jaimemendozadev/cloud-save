@@ -44,6 +44,10 @@ const signup = async (req, res) => {
 
       newUser.token = userToken;
 
+      // For a new User, replace the Drive_id with 
+      // an empty [] to prevent mapping error on FE 
+      newUser.drive = [];
+
       res.send(newUser);
     }
 
@@ -61,7 +65,7 @@ const foundUser = async (req, res) => {
 
   // Get the User's Drive with Documents
   let userDrive = await Drive.find({owner: req.user._id}).populate('root').exec();
-
+  
   userDrive = userDrive.pop();
 
   userInDB.drive = userDrive.root;

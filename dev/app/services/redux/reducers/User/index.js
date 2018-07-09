@@ -6,7 +6,7 @@ const initialState = {
     last_name: '',
     email: '',
     profile_picture: '',
-    drive: null,
+    drive: [],
     social_login: false,
 }
 

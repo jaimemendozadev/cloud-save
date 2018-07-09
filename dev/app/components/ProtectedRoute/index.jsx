@@ -19,8 +19,6 @@ class ProtectedRoute extends Component {
     handleProtectedRoute = () => {
         const token = localStorage.getItem('token');
 
-        console.log('token inside handleProtectedRoute ', token)
-
         if (token) {
             const { component: Component, ...rest } = this.props;
             return (
@@ -32,16 +30,6 @@ class ProtectedRoute extends Component {
             // When 'START_LOG_OUT fires, we eventually reach this point
             return <Redirect to='/signin' />
         }
-    }
-
-    handleLogOut = () => {
-        const { logOut } = this.props;
-
-        // localStorage.clear();
-
-        logOut();
-
-        this.props.history.push('/signin');
     }
 
     componentDidMount = () => {
@@ -57,16 +45,6 @@ class ProtectedRoute extends Component {
         }
     }
 
-    /*
-    componentDidUpdate = (_prevProps, prevState, _snapshot) => {
-        const { logOutUser } = this.state;
-
-        if (prevState.logOutUser != logOutUser) {
-            this.handleLogOut();
-        }
-    }
-    */
-
     render() {
         console.log('protected route rendering')
         console.log('this.props inside ProtectedRoute ', this.props)
@@ -77,10 +55,8 @@ class ProtectedRoute extends Component {
         const { haveToken } = this.state;
 
         if (logOutUser === true) {
-            console.log('inside logOutUser conditional')
+            console.log('inside logOutUser === true of ProtectedRoute')
             const { logOut } = this.props;
-
-            // localStorage.clear();
 
             logOut();
 
@@ -89,13 +65,11 @@ class ProtectedRoute extends Component {
 
         // If neither Auth process has started, redirect to Homepage
         if (RegularAuthInProgress === false && SocialAuthInProgress === false) {
-            console.log('inside if RegularAuthInProgress === false && SocialAuthInProgress === false')
             return <Redirect to='/signin' />
         }
 
         // If we have the token, handleProtectedRoute
         if (haveToken) {
-            console.log('inside if haveToken and haveToken is ', haveToken)
             return this.handleProtectedRoute();
         }
 

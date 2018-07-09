@@ -99,8 +99,6 @@ class Homepage extends Component {
         // & file upload on FE
         const finalResult = await uploadFileToAWS(AWS_Payload, currentFileObj, currentFile.type);
 
-        console.log('finalResult inside handleSubmit ', finalResult)
-
         if (finalResult === 'File upload error') {
             this.setState({
                 errorMessage: 'There was an error uploading the file. Please try again later.'
@@ -115,8 +113,6 @@ class Homepage extends Component {
 
     render() {
         const { drive, currentUser: { first_name } } = this.state;
-        console.log('Homepage renders')
-        console.log('this.props inside Homepage ', this.props)
 
         return (
             <div className='homepage'>
