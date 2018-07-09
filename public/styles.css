@@ -6,12 +6,41 @@
 html {
   box-sizing: border-box; }
 
+.splash-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .splash-page-container .splash-page-header {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid grey; }
+  .splash-page-container .splash-page-main {
+    width: 100%;
+    margin-top: 5em;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; }
+    .splash-page-container .splash-page-main .cloud-img-container {
+      width: 40%; }
+    .splash-page-container .splash-page-main .splash-page-verbiage {
+      width: 40%; }
+
+.splash-page-btn {
+  text-align: center;
+  width: 400px;
+  padding: 1em;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.2em;
+  margin-top: 2em; }
+
 .sign-up {
   width: 600px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  margin: 0 auto; }
   .sign-up h1 {
     text-align: center; }
   .sign-up form {
