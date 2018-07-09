@@ -1,5 +1,5 @@
-import {INIT_SOCIAL_AUTH, INIT_REGULAR_AUTH, TOKEN_SET, RESET_SOCIAL_AUTH, START_LOG_OUT, LOG_OUT} from '../../actions/Auth';
-import { PURGE } from 'redux-persist';
+import {INIT_SOCIAL_AUTH, INIT_REGULAR_AUTH, TOKEN_SET, RESET_SOCIAL_AUTH, START_LOG_OUT} from '../../actions/Auth';
+
 
 const initialState = {
   SocialAuthInProgress: false,
@@ -25,12 +25,6 @@ const authStatusReducer = (state = initialState, action) => {
     
     case START_LOG_OUT:
       return {};
-      
-    case LOG_OUT:
-      return {...state, ...action.payload};
-    
-    case PURGE:
-      return initialState;
 
     default:
       return state;

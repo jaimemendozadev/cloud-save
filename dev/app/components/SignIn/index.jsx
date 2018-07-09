@@ -4,8 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { prepPayload, escapeHtml } from './utils';
 import { initSocialAuth, initRegularAuth, getSocialAuthUser, getRegularAuthUser, resetSocialAuth, tokenSet } from '../../services/redux/actions/Auth'
 
-const API_URL = 'http://localhost:3000/api';
-
 
 class SignIn extends Component {
     constructor(props) {
@@ -147,8 +145,6 @@ class SignIn extends Component {
     render() {
         const { first_name, last_name, email, password, redirect, redirectTarget } = this.state;
         const { RegularAuthInProgress } = this.props;
-
-        console.log('this.props inside Signin ', this.props)
 
         if (redirect && redirectTarget) {
             return <Redirect to={`/${redirectTarget}`} />

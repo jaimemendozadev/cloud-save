@@ -5,8 +5,8 @@ export const APP_INIT = 'APP_INIT';
 export const TOKEN_SET = 'TOKEN_SET';
 export const RESET_SOCIAL_AUTH = 'RESET_SOCIAL_AUTH';
 export const START_LOG_OUT = 'START_LOG_OUT';
-export const LOG_OUT = 'LOG_OUT';
-import { PURGE } from 'redux-persist';
+
+
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -94,13 +94,6 @@ export const startUserLogOut = () => {
   return {
     type: START_LOG_OUT,
     payload: {logOutUser: true}
-  }
-}
-
-export const logOut = () => {
-  return {
-    type: LOG_OUT,
-    payload: PURGE
   }
 }
    
