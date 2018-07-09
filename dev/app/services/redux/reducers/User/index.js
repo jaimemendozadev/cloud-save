@@ -16,7 +16,6 @@ const currentUserReducer = (state = initialState, action) => {
         return {...state, ...action.payload};
     
       case UPDATE_USER_DRIVE:
-        console.log('UPDATE_USER_DRIVE ', {...state, ...action.payload})
         return {...state, ...action.payload};
 
       case START_LOG_OUT:

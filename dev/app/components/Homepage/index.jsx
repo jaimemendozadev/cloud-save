@@ -17,6 +17,8 @@ class Homepage extends Component {
             currentUser,
             drive: [],
             errorMessage: '',
+            AWS_UploadArgs: [],
+            fileUploadInProgress: false,
         }
     }
 
@@ -41,7 +43,13 @@ class Homepage extends Component {
     }
 
     handleStatusDisplay = () => {
-        const { currentFile, errorMessage } = this.state;
+        const { currentFile, errorMessage, fileUploadInProgress } = this.state;
+
+
+        if (fileUploadInProgress === true) {
+            return `Please wait while we upload your file!`;
+        }
+
 
         if (errorMessage) {
             return <span className='errorMsg'>{errorMessage}</span>;
@@ -89,26 +97,53 @@ class Homepage extends Component {
     handleSubmit = async event => {
         event.preventDefault();
 
+        // Prep the AWS Payload, reset state, invoke AWS flow in CDU
         const { currentFile, currentFileObj, targetLocation } = this.state;
-        const { fetchUpdatedDrive } = this.props;
-
         currentFile.targetLocation = targetLocation;
-        const token = localStorage.getItem('token');
 
+        const token = localStorage.getItem('token');
+        const fileType = currentFile.type;
         const AWS_Payload = prepAWSPayload('POST', token, currentFile)
 
-        // Kicks off getting preSignedUrl, Doc/Drive creation/update on Server
-        // & file upload on FE
-        const finalResult = await uploadFileToAWS(AWS_Payload, currentFileObj, currentFile.type);
 
-        if (finalResult === 'File upload error') {
+
+        this.setState({
+            currentFile: {},
+            currentFileObj: {},
+            fileUploadInProgress: true,
+            AWS_UploadArgs: [AWS_Payload, currentFileObj, fileType]
+        })
+    }
+
+    componentDidUpdate = async (_prevProps, prevState, _snapshot) => {
+        const { fileUploadInProgress, AWS_UploadArgs } = this.state
+        const { fetchUpdatedDrive } = this.props;
+
+
+        //If the fileUploadInProgress is true & AWS_UploadArgs array has 3 items
+        if (prevState.fileUploadInProgress != fileUploadInProgress &&
+            AWS_UploadArgs.length === 3) {
+
+
+            // Kicks off getting preSignedUrl, Doc/Drive creation/update on Server
+            // & file upload on FE
+
+            const finalResult = await uploadFileToAWS(...AWS_UploadArgs);
+
+            if (finalResult === 'File upload error') {
+                this.setState({
+                    errorMessage: 'There was an error uploading the file. Please try again later.'
+                });
+            }
+
+            // We've succeed in uploading the file, 
+            // trigger Redux Action to get updatedDrive
             this.setState({
-                errorMessage: 'There was an error uploading the file. Please try again later.'
-            });
+                fileUploadInProgress: false,
+                AWS_UploadArgs: [],
+            }, () => fetchUpdatedDrive())
         }
 
-        // Trigger Redux Action to get updatedDrive
-        fetchUpdatedDrive()
     }
 
 

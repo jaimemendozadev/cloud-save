@@ -50,28 +50,23 @@ const uploadFileWithUrl = async (signedUrl, file, fileType) => {
           return 'File upload error';
       })
 
-      console.log('resultFromAWS ', resultFromAWS);
-
       return resultFromAWS;
 }
 
 
 
 
-export const uploadFileToAWS = async (AWS_Paylaod, currentFileObj, fileType) => {
+export const uploadFileToAWS = async (AWS_Payload, currentFileObj, fileType) => {
 
     // Get preSignedUrl from Server
-    let serverResponse = await fetch(`${API_URL}/aws/signurl`, AWS_Paylaod).then(response => response.json());
+    let serverResponse = await fetch(`${API_URL}/aws/signurl`, AWS_Payload).then(response => response.json())
+      .catch(error => console.log('error getting preSignedUrl ', error));
   
-        
     const {preSignedUrl} = serverResponse;
     
     // Make second API call to save currentFileObj in S3
-  
     let result = await uploadFileWithUrl(preSignedUrl, currentFileObj, fileType)
   
-    console.log('result from final file upload ', result)
-
     return result;
   
   }
