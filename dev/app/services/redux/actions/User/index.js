@@ -1,4 +1,4 @@
-const UPDATE_USER_DRIVE = 'UPDATE_USER_DRIVE';
+export const UPDATE_USER_DRIVE = 'UPDATE_USER_DRIVE';
 const {prepAuthPayload} = require('../utils');
 
 const API_URL = 'http://localhost:3000/api'
@@ -14,7 +14,7 @@ export const fetchUpdatedDrive = () => {
       .then(updatedDrive => {
         
         console.log('updatedDrive from server ', updatedDrive);
-        
+
         const drive = {
           drive: updatedDrive,
         }
