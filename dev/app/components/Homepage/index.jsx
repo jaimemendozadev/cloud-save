@@ -9,13 +9,13 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
         const { currentUser } = this.props;
-        const { drive } = currentUser;
+        // const { drive } = currentUser;
         this.state = {
             targetLocation: '/',
             currentFile: {},
             currentFileObj: {},
             currentUser,
-            drive,
+            drive: [],
             errorMessage: '',
         }
     }
@@ -112,7 +112,9 @@ class Homepage extends Component {
 
 
     render() {
-        const { drive, currentUser: { first_name } } = this.state;
+        // const { drive, currentUser: { first_name } } = this.state;
+        const { currentUser: { first_name } } = this.state;
+        const { drive } = this.props;
 
         return (
             <div className='homepage'>
@@ -156,7 +158,8 @@ class Homepage extends Component {
 
 function mapStateToProps({ currentUser }) {
     return {
-        currentUser
+        currentUser,
+        drive: currentUser.drive,
     }
 }
 
