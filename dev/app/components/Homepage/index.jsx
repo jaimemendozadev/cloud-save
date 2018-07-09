@@ -71,6 +71,7 @@ class Homepage extends Component {
 
         return drive.map(document => {
             const { original_file_name, aws_url, file_type } = document;
+
             return <Document
                 key={`${original_file_name}-${aws_url}`}
                 original_file_name={original_file_name}

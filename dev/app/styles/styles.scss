@@ -21,8 +21,6 @@ $border-color: grey;
 }
 
 
-
-
 *:before, *:after {
   margin: 0;
   padding: 0;
@@ -179,6 +177,13 @@ html {
   margin-bottom: 1em;
   border-radius: 3px;
   width: 100%;
+
+
+  .doc-icon {
+    margin-right: 10px;
+  }
+
+  
 }
 
 
@@ -190,6 +195,9 @@ html {
 .errorMsg {
   color: red;
 }
+
+
+
 
 /*****************
 * Citations
