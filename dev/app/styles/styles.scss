@@ -46,7 +46,6 @@ html {
   }
 
 
-
   form {
     display: flex;
     flex-direction: column;
@@ -164,9 +163,15 @@ html {
 
 }
 
-.drive-display {
-  font-size: 1.5em;
+.homepage-bottom-half {
+
+  margin-top: 5em;
+
+  .drive-display {
+    font-size: 1.5em;
+  }
 }
+
 
 .document-container {
   border: 1px solid $border-color;

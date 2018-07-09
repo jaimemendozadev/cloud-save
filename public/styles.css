@@ -115,8 +115,10 @@ html {
     width: 800px;
     font-size: 1.5em; }
 
-.drive-display {
-  font-size: 1.5em; }
+.homepage-bottom-half {
+  margin-top: 5em; }
+  .homepage-bottom-half .drive-display {
+    font-size: 1.5em; }
 
 .document-container {
   border: 1px solid grey;

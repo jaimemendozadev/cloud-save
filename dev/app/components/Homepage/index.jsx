@@ -40,7 +40,7 @@ class Homepage extends Component {
         });
     }
 
-    handleFileNameDisplay = () => {
+    handleStatusDisplay = () => {
         const { currentFile, errorMessage } = this.state;
 
         if (errorMessage) {
@@ -54,6 +54,7 @@ class Homepage extends Component {
         return `${currentFile.name}`;
 
     }
+
 
     handleDriveDisplay = drive => {
         if (!drive.length) {
@@ -140,7 +141,7 @@ class Homepage extends Component {
                         </form>
 
                         <div className='file-name-display'>
-                            {this.handleFileNameDisplay()}
+                            {this.handleStatusDisplay()}
                         </div>
                     </div>
                 </div>
