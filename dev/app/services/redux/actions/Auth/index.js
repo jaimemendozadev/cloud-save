@@ -90,22 +90,12 @@ export const resetSocialAuth = () => {
 }
 
 export const startUserLogOut = () => {
-  console.log('PURGE IS ', PURGE)
+
   return {
     type: START_LOG_OUT,
     payload: {logOutUser: true}
   }
 }
-
-
-/*
-export const startUserLogOut = () => {
- 
-  return {
-    type: PURGE,
-  }
-}
-*/
 
 export const logOut = () => {
   return {

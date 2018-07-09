@@ -19,6 +19,8 @@ class ProtectedRoute extends Component {
     handleProtectedRoute = () => {
         const token = localStorage.getItem('token');
 
+        console.log('token inside handleProtectedRoute ', token)
+
         if (token) {
             const { component: Component, ...rest } = this.props;
             return (
@@ -27,7 +29,7 @@ class ProtectedRoute extends Component {
                 )} />
             )
         } else {
-            // this.props.history.push('/signin');
+            // When 'START_LOG_OUT fires, we eventually reach this point
             return <Redirect to='/signin' />
         }
     }
@@ -44,6 +46,8 @@ class ProtectedRoute extends Component {
 
     componentDidMount = () => {
         const token = localStorage.getItem('token');
+
+        console.log("inside CDM for ProtectedRoute and token is ", token)
 
         // If we get the token from localStorage, rerender component
         if (token) {
@@ -66,6 +70,7 @@ class ProtectedRoute extends Component {
     render() {
         console.log('protected route rendering')
         console.log('this.props inside ProtectedRoute ', this.props)
+        console.log('this.state inside ProtectedRoute ', this.state)
 
         const { RegularAuthInProgress, SocialAuthInProgress, logOutUser } = this.state;
 
@@ -84,11 +89,13 @@ class ProtectedRoute extends Component {
 
         // If neither Auth process has started, redirect to Homepage
         if (RegularAuthInProgress === false && SocialAuthInProgress === false) {
+            console.log('inside if RegularAuthInProgress === false && SocialAuthInProgress === false')
             return <Redirect to='/signin' />
         }
 
         // If we have the token, handleProtectedRoute
         if (haveToken) {
+            console.log('inside if haveToken and haveToken is ', haveToken)
             return this.handleProtectedRoute();
         }
 

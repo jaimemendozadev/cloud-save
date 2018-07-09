@@ -73,6 +73,11 @@ class Homepage extends Component {
 
     handleLogOut = () => {
         const { startUserLogOut } = this.props;
+        /*
+          Clearing localStorage doesn't happen fast
+          LogOut process terminates at <ProtectedRoute />
+          handleProtectedRoute()
+        */
 
         localStorage.clear();
 
