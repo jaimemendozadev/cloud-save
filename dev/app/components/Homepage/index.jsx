@@ -87,6 +87,7 @@ class Homepage extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
+
         const { currentFile, currentFileObj, targetLocation } = this.state;
         const { fetchUpdatedDrive } = this.props;
 

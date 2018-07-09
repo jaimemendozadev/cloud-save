@@ -45,13 +45,7 @@ const getSignedUrl = (req, res) => {
 }
 
 
-const uploadFile = (req, res) => {
-
-}
-
-
 
 module.exports = {
   getSignedUrl,
-  uploadFile
 }
