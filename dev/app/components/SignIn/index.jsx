@@ -39,19 +39,6 @@ class SignIn extends Component {
 
         const { toggleSignIn, toggleLogIn } = this.state;
 
-        // if (toggleSignIn === true) {
-        //     this.setState({
-        //         toggleLogIn: true,
-        //         toggleSignIn: false,
-        //     });
-        // } else {
-        //     this.setState({
-        //         toggleLogIn: false,
-        //         toggleSignIn: true,
-        //     });
-
-        // }
-
         this.setState({
             toggleLogIn: !toggleLogIn,
             toggleSignIn: !toggleSignIn,

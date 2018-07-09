@@ -62,29 +62,16 @@ html {
 .homepage {
   width: 70%;
   height: 100vh;
-  border: 1px solid pink;
-  margin: 0 auto;
+  border-radius: 4px;
+  margin: 3em auto;
   display: flex;
   flex-wrap: wrap;
   padding: 2em; }
 
-/* Column Styling
-.homepage {
-  width: 70%;
-  height: 100vh;
-  border: 1px solid pink;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 2em;
-}
-*/
 .headers-container {
   height: 200px; }
 
 .file-picker {
-  border: 1px solid green;
   display: flex;
   width: 80%;
   height: 200px;
@@ -97,12 +84,11 @@ html {
     position: relative;
     overflow: hidden;
     display: block;
-    background-color: rebeccapurple;
     height: 50px;
     margin-right: 2em; }
     .file-picker .upload-btn-container .upload-btn {
-      border: 2px solid gray;
-      color: gray;
+      border: 2px solid grey;
+      color: grey;
       background-color: white;
       padding: 8px 20px;
       border-radius: 8px;
@@ -114,11 +100,10 @@ html {
       position: absolute;
       left: 0;
       top: 0;
-      opacity: 0;
-      background-color: yellow; }
+      opacity: 0; }
   .file-picker button {
-    border: 2px solid gray;
-    color: gray;
+    border: 2px solid grey;
+    color: grey;
     background-color: white;
     padding: 8px 20px;
     border-radius: 8px;
@@ -126,22 +111,20 @@ html {
     font-weight: bold;
     height: 50px; }
   .file-picker .file-name-display {
-    border: 1px solid salmon;
     height: 20%;
     width: 800px;
     font-size: 1.5em; }
 
 .drive-display {
-  font-size: 1.5em;
-  border: 1px solid goldenrod; }
+  font-size: 1.5em; }
 
 .document-container {
   border: 1px solid grey;
   padding: 1em; }
 
 .logout-btn {
-  border: 2px solid gray;
-  color: gray;
+  border: 2px solid grey;
+  color: grey;
   background-color: white;
   padding: 8px 20px;
   border-radius: 8px;
@@ -150,54 +133,6 @@ html {
 
 .errorMsg {
   color: red; }
-
-@media only screen and (max-width: 650px) {
-  .file-picker {
-    border: 1px solid green;
-    display: flex;
-    width: 100%;
-    height: 400px;
-    flex-wrap: wrap; }
-    .file-picker form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      height: 80%; }
-    .file-picker .upload-btn-container {
-      position: relative;
-      overflow: hidden;
-      display: block;
-      background-color: rebeccapurple;
-      height: 50px;
-      margin: 0 auto 1.5em auto; }
-      .file-picker .upload-btn-container .upload-btn {
-        border: 2px solid gray;
-        color: gray;
-        background-color: white;
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 20px;
-        font-weight: bold;
-        width: 200px; }
-      .file-picker .upload-btn-container input[type=file] {
-        font-size: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        opacity: 0;
-        background-color: yellow; }
-    .file-picker button {
-      border: 2px solid gray;
-      color: gray;
-      background-color: white;
-      padding: 8px 20px;
-      border-radius: 8px;
-      font-size: 20px;
-      font-weight: bold;
-      height: 50px;
-      width: 200px; } }
 
 /*****************
 * Citations
