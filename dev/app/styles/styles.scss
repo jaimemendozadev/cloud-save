@@ -8,6 +8,16 @@
   font-weight: bold;
 }
 
+@mixin bigButtonBase {
+  text-align: center;
+  width: 400px;
+  padding: 1em;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.2em;
+  margin-top: 2em;
+}
+
 
 *:before, *:after {
   margin: 0;
@@ -68,19 +78,18 @@ html {
   }
 
   .googleSignUp {
-    text-align: center;
-    width: 400px;
-    padding: 1em;
-    border: 1px solid black;
-    border-radius: 3px;
-    font-size: 1.2em;
-    margin-top: 2em;
+    @include bigButtonBase();
 
     a {
       text-decoration: none;
       color: black; 
     }
  }
+}
+
+
+.log-in-btn {
+  @include bigButtonBase();
 }
 
 

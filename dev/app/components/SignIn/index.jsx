@@ -17,6 +17,8 @@ class SignIn extends Component {
             signInError: '',
             redirect: false,
             redirectTarget: null,
+            toggleLogIn: false,
+            toggleSignIn: true,
         }
     }
 
@@ -30,6 +32,30 @@ class SignIn extends Component {
         if (signInError) {
             return <h3 className='errorMsg'>{signInError}</h3>
         }
+    }
+
+    toggleSignInLogIn = event => {
+        event.preventDefault();
+
+        const { toggleSignIn, toggleLogIn } = this.state;
+
+        // if (toggleSignIn === true) {
+        //     this.setState({
+        //         toggleLogIn: true,
+        //         toggleSignIn: false,
+        //     });
+        // } else {
+        //     this.setState({
+        //         toggleLogIn: false,
+        //         toggleSignIn: true,
+        //     });
+
+        // }
+
+        this.setState({
+            toggleLogIn: !toggleLogIn,
+            toggleSignIn: !toggleSignIn,
+        });
     }
 
     handleOnFocus = formField => {
@@ -137,13 +163,34 @@ class SignIn extends Component {
         }
     }
 
+    renderNameInputs = () => {
+        const { toggleSignIn, first_name, last_name, } = this.state;
+
+        if (toggleSignIn === true) {
+            return (
+                <div>
+                    <div className='form-child'>
+                        <label htmlFor='first-name'>First Name</label>
+                        <input onFocus={() => this.handleOnFocus('first_name')} value={first_name} onChange={this.handleFirstName} type='text' />
+                    </div>
+                    <div className='form-child'>
+                        <label htmlFor='last-name'>Last Name</label>
+                        <input onFocus={() => this.handleOnFocus('last_name')} value={last_name} onChange={this.handleLastName} type='text' />
+                    </div>
+                </div>
+            )
+        }
+
+        return null;
+    }
+
     componentDidMount = () => {
         // Social Auth triggers page refresh, so checkSocialAuth in CDM
         this.checkSocialAuth()
     }
 
     render() {
-        const { first_name, last_name, email, password, redirect, redirectTarget } = this.state;
+        const { first_name, last_name, email, password, redirect, redirectTarget, toggleLogIn, toggleSignIn } = this.state;
         const { RegularAuthInProgress } = this.props;
 
         if (redirect && redirectTarget) {
@@ -156,16 +203,11 @@ class SignIn extends Component {
 
         return (
             <div className='sign-up'>
-                <h1>Sign In</h1>
+                <h1> {toggleSignIn === true ? `Sign In` : `Log In`}</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div className='form-child'>
-                        <label htmlFor='first-name'>First Name</label>
-                        <input onFocus={() => this.handleOnFocus('first_name')} value={first_name} onChange={this.handleFirstName} type='text' />
-                    </div>
-                    <div className='form-child'>
-                        <label htmlFor='last-name'>Last Name</label>
-                        <input onFocus={() => this.handleOnFocus('last_name')} value={last_name} onChange={this.handleLastName} type='text' />
-                    </div>
+
+                    {this.renderNameInputs()}
+
                     <div className='form-child'>
                         <label htmlFor='email'>Email</label>
                         <input onFocus={() => this.handleOnFocus('email')} value={email} onChange={this.handleEmail} type='text' />
@@ -177,7 +219,11 @@ class SignIn extends Component {
                     <button>Submit</button>
                 </form>
                 <div onClick={this.handleSocialAuth} className='googleSignUp'>
-                    <a href="http://localhost:3000/api/auth/google">Sign In with Google</a>
+                    <a href="http://localhost:3000/api/auth/google">{toggleSignIn === true ? `Sign In with Google` : `Log In with Google`}</a>
+                </div>
+
+                <div onClick={this.toggleSignInLogIn} className='log-in-btn'>
+                    <a href="#">{toggleSignIn === true ? `Or Log In` : `Or Sign In`}</a>
                 </div>
                 <div>
                     {this.displayError()}
