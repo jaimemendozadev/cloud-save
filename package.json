@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev-start": "nodemon index.js",
-    "build": "webpack --mode='development' --watch"
+    "dev-build": "webpack --mode='development' --watch",
+    "start": "node index.js",
+    "build": "webpack --mode='production'"
   },
   "dependencies": {
     "aws-sdk": "^2.270.1",
